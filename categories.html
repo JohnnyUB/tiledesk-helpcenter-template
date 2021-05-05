@@ -1,0 +1,41 @@
+---
+layout: category_list
+title: Explore Categories
+add_to_menu: false
+description: "Meta description for Support page"
+keywords: "responsive,jekyll,minimal template"
+---
+<div class="topics-area bg-color1">
+         <div class="topics-wrapper section-spacing bminus-30">
+            <div class="container">
+               <div class="col">
+                  {% for category in site.data.category.category %}
+                  {% capture category_name %}{{ category.key}}{% endcapture %}
+                  {% capture category_label %}{{ category.label}}{% endcapture %}
+                    {% capture category_draft %}{{ category.draft}}{% endcapture %}
+                    {% if category_draft == "false" %}
+                     <div class="row">
+                        <article class="topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
+                           <header class="topics-title">
+                              {% assign all_posts = site.categories[category_name] %}
+                              <a href="{{ category.url  | relative_url }}"><h4 class="heading-4 text-capitalize">{{ category_label }} ({{all_posts.size}})</h4></a>
+                           </header>
+                           <ul class="topics-list list-inline">
+                              {% assign normal_posts = site.categories[category_name] %}
+                              {% for doc_post in normal_posts %}
+                                 {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                                 {% if post_draft == "false" %}
+                                 <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }} </a></li>
+                                 {% endif %}
+                              {% endfor %}
+                           </ul>
+                        </article>
+                     </div>
+                  {% endif %}
+                  {% endfor %}			  
+               </div>
+            </div>
+         </div>
+      </div>
+</section>
+<!-- End Topics Area -->
