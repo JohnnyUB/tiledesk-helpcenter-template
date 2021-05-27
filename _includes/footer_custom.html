@@ -82,6 +82,24 @@
                         </ul>
                     </div>
                 </div>
+                <div class="col-md-6 col-lg-3">
+                    <script type="application/javascript">
+                        var tiledesk_id = "{{site.data.tiledesk.id | json}}";
+                        window.tiledeskSettings = 
+                        {
+                        projectid: tiledesk_id
+                        };
+                        (function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id; js.async=true;
+                        js.src = "https://widget.tiledesk.com/v4/launch.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                        //alert("stringa concatenata con " + js.id);
+                        //alert("tiledesk id " + {{site.data.tiledesk.id}});
+                        }(document, 'script', 'tiledesk-jssdk'));
+                       </script>
+                </div>
             </div>
         </div>
     </div>
