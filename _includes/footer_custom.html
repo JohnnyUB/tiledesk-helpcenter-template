@@ -1,5 +1,6 @@
 <!-- Start Footer Area -->
-<footer class="footer-area bg-color3">
+{% capture bg-color3-custom %}{{site.data.footer.custom_color}}{% endcapture %}
+<footer class="footer-area bg-color3" style="background-color: {{bg-color3-custom}}!important;">
     <div class="footer-wrapper section-spacing bminus-30">
         <div class="container">
             <div class="row">
@@ -73,6 +74,10 @@
                             {% capture youtube %}{{site.data.footer.youtube}}{% endcapture %}
                             {% if youtube != "" %}
                                 <li class="list-inline-item"><a href="{{youtube}}" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                            {% endif %}
+                            {% capture website %}{{site.data.footer.website}}{% endcapture %}
+                            {% if website != "" %}
+                                <li class="list-inline-item"><a href="{{website}}" target="_blank"><i class="fa fa-internet-explorer"></i></a></li>
                             {% endif %}
                         </ul>
                     </div>

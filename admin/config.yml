@@ -2,6 +2,7 @@
 # finale
 backend:
   name: git-gateway #-- PRODUZIONE test-repo  
+  proxy_url: http://localhost:8081/api/v1
   repo: leomirco/tiledesk-helpcenter-template #-- PRODUZIONE
   branch: master
 # When running locally, try to use a local proxy server instead of GitHub, if
@@ -18,7 +19,7 @@ locale: 'it'
 #publish_mode: editorial_workflow
 collections:
   # POST ARTICOLI HELP DESK
-  - name: "posts"
+  - name: "_posts"
     #preview_path: "blog/{{year}}/{{month}}/{{slug}}"
     label: "Posts"
     label_singular: 'Post' # Used in the UI, ie: "New Post"
@@ -160,6 +161,11 @@ collections:
                 fields:
                   - { label: Text, name: text, widget: string }
                   - { label: Url, name: url, widget: string }
+      - label: "Integrazione Tiledesk"
+        name: "tiledesk"
+        file: "_data/tiledesk.yml"
+        fields:
+          - { label: Tiledesk ID, name: id, widget: string }
       - label: "Custom Categories Widget"
         name: "topics_area"
         file: "_data/topicsarea.yml"
@@ -190,15 +196,23 @@ collections:
           - label: Colore header
             name: custom_color
             widget: color
-            enableAlpha: true,
-            allowInput: true 
+            enableAlpha: true
+            allowInput: true
+          - robots: Robots
+            name: robots
+            widget: select
+            allow_add: false
+            allowInput: false
+            default: ["index"]
+            options: ["index", "noindex"]
       - label: "Custom Footer"
         name: "footer"
         file: "_data/footer.yml"
         fields:
           - { label: Titolo, name: title, widget: string, required: false}
-          - { label: Sottotitolo, name: subtitle, widget: string, required: false }
-          - { label: Behance, name: behance, widget: string, required: false}
+          - { label: Sottotitolo, name: subtitle, widget: string, required: false, enableAlpha: true, allowInput: true, default: "#f2f6fb" }
+          - { label: Colore footer, name: custom_color, widget: color, required: false }
+          - { label: Facebook, name: facebook, widget: string, required: false}
           - { label: Twitter, name: twitter, widget: string, required: false }
           - { label: Instagram, name: instagram, widget: string, required: false }
           - { label: Github, name: github, widget: string, required: false }
@@ -206,7 +220,8 @@ collections:
           - { label: Reddit, name: reddit, widget: string, required: false }
           - { label: Vimeo, name: vimeo, widget: string, required: false }
           - { label: Dribble, name: dribble, widget: string, required: false }
-          - { label: youtube, name: youtube, widget: string, required: false }
+          - { label: Youtube, name: youtube, widget: string, required: false }
+          - { label: Sito web, name: website, widget: string, required: false }
       - label: "Custom Blog Name"
         name: "blog"
         file: "_data/blog.yml"

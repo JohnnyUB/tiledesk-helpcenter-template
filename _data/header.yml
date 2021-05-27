@@ -1,3 +1,4 @@
 favicon_url:
 logo_url: 
-custom_color:
+custom_color: "#33b4f0"
+robots: index
