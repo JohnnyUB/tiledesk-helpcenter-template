@@ -1,1 +1,0 @@
-# tiledesk-helpcenter-template
