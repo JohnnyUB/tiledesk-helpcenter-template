@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/index.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-06-07T19:53:19+02:00</updated><id>http://localhost:4000/index.xml</id><title type="html">Tiledesk - Documentation Website</title><subtitle>Tiledesk is AI powered live chat platform</subtitle><entry><title type="html">Quinto post</title><link href="http://localhost:4000/configurazione_del_client/quinto-post" rel="alternate" type="text/html" title="Quinto post" /><published>2021-06-07T19:52:16+02:00</published><updated>2021-06-07T19:52:16+02:00</updated><id>http://localhost:4000/configurazione_del_client/quinto-post</id><content type="html" xml:base="http://localhost:4000/configurazione_del_client/quinto-post">&lt;p&gt;ddddddddddddddddddddddddddddddddddddddddddd&lt;/p&gt;
+
+&lt;p&gt;vjgkjgjhvhvv,vkvkvkvkvkvkvmm&lt;/p&gt;
+
+&lt;p&gt;b,b,b,b,b,mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm&lt;/p&gt;</content><author><name></name></author><category term="configurazione_del_client" /><category term="tag1" /><summary type="html">Quinto post</summary></entry><entry><title type="html">quarto post</title><link href="http://localhost:4000/intranet/quarto-post" rel="alternate" type="text/html" title="quarto post" /><published>2021-06-07T18:10:00+02:00</published><updated>2021-06-07T18:10:00+02:00</updated><id>http://localhost:4000/intranet/quarto-post</id><content type="html" xml:base="http://localhost:4000/intranet/quarto-post">&lt;p&gt;quarto post&lt;/p&gt;</content><author><name></name></author><category term="intranet" /><category term="tag4" /><summary type="html">quarto post</summary></entry><entry><title type="html">terzo post</title><link href="http://localhost:4000/applicazioni/terzo-post" rel="alternate" type="text/html" title="terzo post" /><published>2021-06-07T18:08:57+02:00</published><updated>2021-06-07T18:08:57+02:00</updated><id>http://localhost:4000/applicazioni/terzo-post</id><content type="html" xml:base="http://localhost:4000/applicazioni/terzo-post">&lt;p&gt;terzo post&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cliccare sul menu a tendina in corrispondenza della voce “&lt;strong&gt;Utilizza un dicerso server LDAP&lt;/strong&gt;”, selezionare la rubrica remota che è stata appena creata e premere “&lt;strong&gt;OK&lt;/strong&gt;”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://bpphelpcenter.netlify.app/images/uploads/schermata-da-2021-04-28-17-52-32.png&quot; alt=&quot;Utilizza un dicerso server LDAP&quot; title=&quot;Utilizza un dicerso server LDAP&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Andare sulla barra del menù di Thunderbird e cliccare su &lt;strong&gt;Strumenti –&amp;gt; Opzioni&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://bpphelpcenter.netlify.app/images/uploads/schermata-da-2021-04-28-17-54-00.png&quot; alt=&quot;Strumenti --&amp;gt; Opzioni&quot; title=&quot;Strumenti --&amp;gt; Opzioni&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="applicazioni" /><category term="tag3" /><summary type="html">terzo post</summary></entry><entry><title type="html">secondo post</title><link href="http://localhost:4000/configurazione_della_rete/secondo-post" rel="alternate" type="text/html" title="secondo post" /><published>2021-06-07T18:02:26+02:00</published><updated>2021-06-07T18:02:26+02:00</updated><id>http://localhost:4000/configurazione_della_rete/secondo-post</id><content type="html" xml:base="http://localhost:4000/configurazione_della_rete/secondo-post">&lt;p&gt;secondo post&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;“&lt;strong&gt;Configurazione avanzata&lt;/strong&gt;”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://bpphelpcenter.netlify.app/images/uploads/schermata-da-2021-04-28-17-38-38.png&quot; alt=&quot;Configurazione avanzata&quot; title=&quot;Configurazione avanzata&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Rimuovere la spunta da “&lt;strong&gt;Lascia i messaggi sul server&lt;/strong&gt;”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://bpphelpcenter.netlify.app/images/uploads/schermata-da-2021-04-28-17-48-40.png&quot; alt=&quot;Lascia i messaggi sul server&quot; title=&quot;Lascia i messaggi sul server&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cliccare su “&lt;strong&gt;Composizione e indirizzi&lt;/strong&gt;” sul menù nella parte sinistra della finestra, poi su “&lt;strong&gt;Utilizza un diverso server LDAP&lt;/strong&gt;” e successivamente su “&lt;strong&gt;Modifica cartelle&lt;/strong&gt;”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://bpphelpcenter.netlify.app/images/uploads/schermata-da-2021-04-28-17-50-12.png&quot; alt=&quot;Modifica cartelle&quot; title=&quot;Modifica cartelle&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cliccare su “&lt;strong&gt;Aggiungi&lt;/strong&gt;”, compilare i campi come nella seguente figura, premere “&lt;strong&gt;OK&lt;/strong&gt;” e nella finestra successiva ancora “&lt;strong&gt;OK&lt;/strong&gt;”&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="configurazione_della_rete" /><category term="tag2" /><category term="tag3" /><summary type="html">secondo post</summary></entry><entry><title type="html">primo post</title><link href="http://localhost:4000/configurazione_del_client/primo-post" rel="alternate" type="text/html" title="primo post" /><published>2021-06-07T17:18:40+02:00</published><updated>2021-06-07T17:18:40+02:00</updated><id>http://localhost:4000/configurazione_del_client/primo-post</id><content type="html" xml:base="http://localhost:4000/configurazione_del_client/primo-post">&lt;p&gt;primo post&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Rimuovere la spunta relativa alla voce “&lt;strong&gt;Ricorda password&lt;/strong&gt;”, compilare i campi “&lt;strong&gt;Nome&lt;/strong&gt;” (nome e cognome dell’utente) e “&lt;strong&gt;Indirizzo email&lt;/strong&gt;” (sigla.cognome@bpp.it). Infine premere “&lt;strong&gt;Continua&lt;/strong&gt;”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://bpphelpcenter.netlify.app/images/uploads/schermata-da-2021-04-28-17-36-54.png&quot; alt=&quot;Registrare un nuovo account&quot; title=&quot;Registrare un nuovo account&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Nella schermata che si presenterà successivamente, compilare i campi (escluso il campo “&lt;strong&gt;Nome&lt;/strong&gt;” e “&lt;strong&gt;Indirizzo email&lt;/strong&gt;”) come nella seguente figura e premere su “&lt;strong&gt;Configurazione avanzata&lt;/strong&gt;”&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="configurazione_del_client" /><category term="tag1" /><summary type="html">primo post</summary></entry></feed>

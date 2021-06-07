@@ -18,7 +18,8 @@ keywords: "responsive,jekyll,minimal template"
                         <article class="topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
                            <header class="topics-title">
                               {% assign all_posts = site.categories[category_name] %}
-                              <a href="{{ category.url  | relative_url }}"><h4 class="heading-4 text-capitalize">{{ category_label }} ({{all_posts.size}})</h4></a>
+                              {% assign my_category_url = "/categories/" | append: category.url %}
+                              <a href="{{ my_category_url  | relative_url }}"><h4 class="heading-4 text-capitalize">{{ category_label }} ({{all_posts.size}})</h4></a>
                            </header>
                            <ul class="topics-list list-inline">
                               {% assign normal_posts = site.categories[category_name] %}

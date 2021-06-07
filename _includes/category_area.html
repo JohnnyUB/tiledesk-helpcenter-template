@@ -17,6 +17,7 @@
                      <h4 class="heading-4 text-capitalize">{{ category_label }} ({{all_posts.size}})</h4> 
                      </header>
                      <ul class="topics-list list-inline">
+                        <!-- AGGIUNGERE IL CAMPO ORDER AL POST-->
                         {% assign evidence_posts = site.categories[category_name] | where: "featured", true %}
                         <!--nel widget nella home compaiono solo i post con featured = true-->
                         {% for doc_post in evidence_posts %}

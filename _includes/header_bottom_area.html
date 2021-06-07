@@ -3,16 +3,25 @@
     <div class="headline-wrapper ">
         <div class="container">
             <div class="row">
-                {% for service in site.data.services %}
-                    <div class="col-md-6 col-lg-4">
+                {% assign my_categories =  site.data.category.category | where: 'type' ,'(categoria)' %}
+                <!--DEBUG: {{my_categories}}-->
+                {% for category in my_categories %}
+                <!--DEB: {{category}} -->
+                     <div class="col-md-6 col-lg-4">
                         <div class="headline-box wow fadeInUp" data-wow-duration="1s" style="visibility:visible; animation-duration:1s; animation-name:fadeInUp;">
                             <div class="headline-logo">
-                                <a href="{{service.url | relative_url}}"><img src="{{service.icon | relative_url}}" alt="{{service.title}}"></a>
+                                {% capture category_url %}{{category.url}}{% endcapture %}
+                                {% capture category_label %}{{category.label}}{% endcapture %}
+                                {% assign category_url_cat = "/categories/" | append: category_url %}
+                                {% capture category_icon %}{{category.icon}}{% endcapture %}
+                                {% capture category_button_label %}{{category.button_label}}{% endcapture %}
+                                {% capture category_description %}{{category.description}}{% endcapture %}
+                                <a href="{{category_url_cat | relative_url}}"><img src="{{category_icon | relative_url}}" alt="{{category_label}}"></a>
                             </div>
                             <div class="headline-content">
-                                <h4 class="heading-4"><a href="{{service.url | relative_url}}">{{service.title}}</a></h4>
-                                <p> {{service.description}}</p>
-                                <a href="{{service.url | relative_url}}" class="btn btn-style3">{{service.button_label}}</a>
+                                <h4 class="heading-6"><a href="{{category_url_cat| relative_url}}">{{category_label}}</a></h4>
+                                <p> {{category_description}}</p>
+                                <a href="{{category_url_cat | relative_url}}" class="btn btn-style3">{{category_button_label}}</a>
                             </div>
                         </div>
                     </div>
