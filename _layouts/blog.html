@@ -9,7 +9,7 @@ layout: default
             <div class="container">
                <div class="row">
                   <div class="col-md-7 col-lg-8 mx-auto"> 
-                     CIAO {{paginator.posts}} -- {{paginator.page}}--{{paginator.total_posts}}--{{paginator.total_pages}}
+                     {{paginator.posts}} -- {{paginator.page}}--{{paginator.total_posts}}--{{paginator.total_pages}}
                    {% for post in paginator.posts %} 
                    CC post
                      <article class="blog-post blog-spacing wow fadeIn" data-wow-duration="1s">
