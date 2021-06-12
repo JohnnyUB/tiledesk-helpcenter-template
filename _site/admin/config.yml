@@ -1,15 +1,15 @@
 # config.yml
 # finale
 backend:
-  name: git-gateway #-- PRODUZIONE test-repo / bpphelpcenter  
+  name: test-repo #git-gateway #-- PRODUZIONE test-repo / bpphelpcenter  
   proxy_url: http://localhost:8081/api/v1
-  repo: Tiledesk/tiledesk-helpcenter-template #-- PRODUZIONE
+  repo: #Tiledesk/tiledesk-helpcenter-template #-- PRODUZIONE
   branch: main
 # When running locally, try to use a local proxy server instead of GitHub, if
 # one is running (netlify-cms-proxy-server).
 # one is running (yarn start-netlify, which uses netlify-cms-proxy-server).
 # when using the default proxy server port
-local_backend: false #--PRODUZIONE false
+local_backend: true #--PRODUZIONE false
   #branch: master # Branch to update (optional; defaults to master)
 # This line should *not* be indented
 media_folder: "images/uploads" # Media files will be stored in the repo under images/uploads
