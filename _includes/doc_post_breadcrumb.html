@@ -3,8 +3,12 @@
         <li class="breadcrumb-item"><a href="{{ "/" | relative_url }}">Home</a></li>
         {% capture category %}{{page.categories}}{% endcapture %}
         {% assign my_category = site.data.category.category | where: "key",category %}
-        {% assign my_category_url = "/categories/" | append: my_category.url %}
-        <li class="breadcrumb-item"><a href="{{  my_category_url | relative_url}}{{ page.categories | replace: '[', '' | replace: ']', '' | replace: '"', '' | replace: '_', '-' | relative_url }}">{{ my_category.first.label | replace: '[', '' | replace: ']', '' | replace: '"', '' | replace: '_', ' '  }}</a></li>
+        <!--DEB1: {{category}} -->
+        {% capture my_category_url %}{{ my_category.first.url}}{% endcapture %}
+        <!--DEB2:{{my_category_url}}-->
+        {% assign my_category_url_complex = "/categories/" | append: my_category_url %}
+        <li class="breadcrumb-item"><a href="{{  my_category_url_complex | relative_url}}">{{ my_category.first.label | replace: '[', '' | replace: ']', '' | replace: '"', '' | replace: '_', ' '  }}</a></li>
+        <!--{{ page.categories | replace: '[', '' | replace: ']', '' | replace: '"', '' | replace: '_', '-' | relative_url }}-->
         <li class="breadcrumb-item active" aria-current="page">{{page.title}}</li>
     </ol>
 </nav>
