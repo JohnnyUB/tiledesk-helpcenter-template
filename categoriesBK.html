@@ -24,29 +24,13 @@ keywords: "responsive,jekyll,minimal template"
                               <a href="{{ my_category_url  | relative_url }}"><h4 class="heading-4 text-capitalize">{{ category_label }} ({{all_posts.size}})</h4></a>
                            </header>
                            <ul class="topics-list list-inline">
-                             <!--PRENDO TUTTE LE SEZIONI-->
-                             {% assign all_sections =  site.data.category.category | where: 'category_id' , category_name %}
-                             <!--CICLO SU TUTTE LE SEZIONI DELLA CATEGORIA-->
-                             {% for section in all_sections %}
-                                 <!--PRENDO TUTTE LE SEZIONI-->
-                                 {% if section !=  category_name %}
-                                 <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-                                    <h2 class="heading-5" itemprop="headline">
-                                    <!-- COSTRUISCO URL SEZIONE -->
-                                    {% capture section_url %}{{ '/categories/' | append: section.url }}{% endcapture %}
-                                    <a href="{{ section_url | relative_url }}" rel="permalink">{{section.label}}</a>
-                                    </h2>
-                                    <!--STAMPO GLI ARTICOLI DELLA SEZIONE-->
-                                    {% assign normal_posts = site.categories[section.key] %}
-                                    {% for doc_post in normal_posts %}
-                                       {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
-                                       {% if post_draft == "false" %}
-                                       <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }} </a></li>
-                                       {% endif %}
-                                    {% endfor %}
-
+                              {% assign normal_posts = site.categories[category_name] %}
+                              {% for doc_post in normal_posts %}
+                                 {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                                 {% if post_draft == "false" %}
+                                 <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }} </a></li>
                                  {% endif %}
-                             {% endfor %}
+                              {% endfor %}
                            </ul>
                         </article>
                      </div>

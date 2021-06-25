@@ -3,14 +3,20 @@
 <section class="topics-area bg-color1">
    <div class="topics-wrapper section-spacing pt-0 bminus-30">
       <div class="container">
+         <div class="section-title">
+            {% assign title = site.data.topicsarea.title %}
+            {% assign subtitle = site.data.topicsarea.subtitle %}
+            <h4 class="heading-4">{{title}}</h4>
+            <h7 class="heading-7"> <p>{{subtitle}}</p></h7>
          <div class="col">
             <!-- Start Topics  Area -->
             <div class="topics-service-area">
                {% for category in site.data.category.category %}
                 {% capture category_name %}{{ category.key}}{% endcapture %}
                 {% capture category_label %}{{ category.label}}{% endcapture %}
-                  {% capture category_draft %}{{ category.draft}}{% endcapture %}
-                  {% if category_draft == "false" %}
+                {% capture category_draft %}{{ category.draft}}{% endcapture %}
+                {% capture category_type %}{{ category.type}}{% endcapture %}
+                {% if category_draft == "false" and category_type == '(categoria)' %}
                <article class="post topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
                      <header class="topics-title">
                         {% assign all_posts = site.categories[category_name] %}

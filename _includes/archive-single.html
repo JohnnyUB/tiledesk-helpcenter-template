@@ -21,6 +21,7 @@ DEB5: {{include.type}}
         <h5 class="heading-5" itemprop="headline">
           <a href="{{ post.url | relative_url }}" rel="permalink">{{ title }}</a>
         </h5>
+        <!--ABSTRACT ARTICOLO-->
         {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
   </article>
 </div>

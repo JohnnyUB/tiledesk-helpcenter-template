@@ -2,14 +2,15 @@
 layout: default
 author_profile: false
 ---
- <!-- PAGINA ELENCO DEI POST DI UNA CATEGORIA -->
+ <!-- PAGINA ELENCO DELLE SEZIONI DI UNA CATEGORIA -->
 {% include header.html %}
    <!-- Start Page Title Area -->
    {% capture bg-cover-custom_color %}{{site.data.header.custom_color}}{% endcapture %}
    <section class="page-title-area bg-cover-custom" style="background-color: {{bg-cover-custom_color}}!important;">
       <div class="page-title-wrapper section-spacing">
          <div class="page-title text-center white-text">
-            <h2 class="heading-2">{{page.title | replace: '_', '-' }}</h2>
+            {% assign page_tit =  site.data.category.category | where: 'key' ,page.title | first %}
+            <h2 class="heading-2">{{page_tit.label | replace: '_', '-' }}</h2>
          </div>
       </div>
    </section>
@@ -21,12 +22,52 @@ author_profile: false
          <div class="container">
             <div class="row">
                <div class="col-md-7 col-lg-8">
-                {% for post in page.posts %}
-                    {% include archive-single.html %}
-                {% endfor %}
+               <!--RIMUOVO DALL'URL /CATEGORIES/-->
+               {% capture category_n %}{{ page.url | remove: "/categories/"}}{% endcapture %}
+               {% capture category_name %}{{ category_n | remove: "/"}}{% endcapture %}
+               <!--CAPISCO SE MI TROVO IN UNA CATEGORIA O SEZIONE-->
+               <!--DEB1: {{category_name}}-->
+               {% assign cat-sez =  site.data.category.category | where: 'key' ,category_name | first %}
+               <!--DEB2: {{cat-sez.type}} -->
+               <!-- SE MI TROVO IN UNA CATEGORIA-->
+               {% if cat-sez.type == "(categoria)" %}
+                  <h5 class="heading-6">Le sezioni della categoria {{page_tit.label | replace: '_', '-' }}</h5>
+                  <!--PRENDO TUTTE LE CATEGORIE-->
+                  <!-- {% assign all_categories = site.categories[category_name] | map: "categories" | uniq %} -->
+                  {% assign all_categories =  site.data.category.category | where: 'category_id' , category_name %}
+                  <article class="post topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
+                  <!--CICLO SU TUTTE LE SEZIONI DELLA CATEGORIA-->
+                  {% for section in all_categories %}
+                     <!--PRENDO TUTTE LE SEZIONI-->
+                     {% if section !=  category_name %}
+                        <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+                           <h5 class="heading-5" itemprop="headline">
+                           <!-- COSTRUISCO URL SEZIONE -->
+                           {% capture section_url %}{{ '/categories/' | append: section.url }}{% endcapture %}
+                           <a href="{{ section_url | relative_url }}" rel="permalink">{{section.label}}</a>
+                           </h5>
+                     {% endif %}
+                  {% endfor %}
+               {% elsif cat-sez.type == "(sezione)"  %}
+                 <!-- SE MI TROVO IN UNA SEZIONE-->
+                 <h4 class="heading-4">Gli articoli della sezione {{page_tit.label | replace: '_', '-' }}</h4>
+                  <!--PRENDO TUTTI GLI ARTICOLI-->
+                  {% assign my_posts_section = site.categories[cat-sez.key] | where: 'category_id',cat-sez.category_id %}
+                  <article class="post topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
+                  <!--CICLO SU TUTTI GLI ARTICOLI DELLA SEZIONE-->
+                     {% for post in my_posts_section %}
+                         {% include archive-single.html %}
+                     {% endfor %}
+               {% endif %}
                </div>
                <div class="col-md-5 col-lg-4">
-                {% include sidebar_cat_list.html %}
+                {% if cat-sez.type == "(categoria)" %}
+                <!--WIDGET CATEGORIE-->
+                  {% include sidebar_cat_list.html %}
+                {% elsif cat-sez.type == "(sezione)"  %}
+                <!--WIDGET SEZIONI-->
+                  {% include sidebar_sect_list.html %}
+                {% endif %}
                 {% include sidebar_new_post_list.html %}
                </div>
             </div>

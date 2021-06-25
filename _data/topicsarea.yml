@@ -1,3 +1,6 @@
 title: Leggi l'articolo
 subtitle: Seleziona la Categoria
 limit: 8
+widget:
+  - name: all_categories
+  - name: category_and_article

@@ -25,7 +25,12 @@
        <!--<span>{{ site.data.ui-text[site.locale].breadcrumb_separator | default: "/" }}</span> --> 
       {% endif %}
       {% if forloop.last %}
-        <li class="breadcrumb-item">{{ page.title | replace: '_', '-' }}</li>
+        {% assign sezione =  site.data.category.category | where: 'key' ,page.title | first %}
+        {% if sezione.label %}
+          <li class="breadcrumb-item">{{ sezione.label |  capitalize | replace: '_', '-' }}</li>
+        {% else %}
+         <li class="breadcrumb-item">{{ page.title | replace: '_', '-' }}</li>
+        {% endif %}
       {% else %}
         {% assign i = i | plus: 1 %}
         <li class="breadcrumb-item">

@@ -1,7 +1,7 @@
 # config.yml
 # finale
 backend:
-  name: git-gateway #-- PRODUZIONE test-repo / bpphelpcenter  
+  name: git-gateway #-- PRODUZIONE test-repo   
   proxy_url: http://localhost:8081/api/v1
   repo: Tiledesk/tiledesk-helpcenter-template #-- PRODUZIONE
   branch: main
@@ -66,12 +66,10 @@ collections:
       - { label: "Immagine post", name: "post_image", widget: "image", default: "/images/uploads/service-icon3.png"  }
       - { label: "Autore", name: "autore", widget: "relation", collection: "config", file: "autori",  search_fields: ['autori.*.name'], value_field: 'autori.*.label', display_fields: ['autori.*.label'], multiple: false, required: false }
       - { label: "Categorie", name: "categories", widget: "relation", collection: "config", file: "category",  search_fields: ['category.*.label'], value_field: 'category.*.key', display_fields: ['category.*.label','category.*.type'], multiple: true, required: false }
-      #- { label: "Categorie1", name: "categories", widget: "relation", collection: "config", file: "sections",  search_fields: [section.*.label'], value_field: 'section.*.key', display_fields: ['section.*.label'], multiple: true, required: false }
-      #- { label: "Sezioni", name: "sections", widget: "relation", collection: "config", file: "sections",  search_fields: ['section.*.label'], value_field: 'section.*.key', display_fields: ['section.*.label'], multiple: false, required: false }
-      #- { label: "Sezione", name: "sections", widget: "relation", collection: "config", file: "category",  search_fields: ["category.*.label"], value_field: 'category.*.section.*.key', display_fields: ["category.*.section.*.label","category.*.label"], multiple: false, required: false }
       - { label: "Tags", name: "tags", widget: "list", default: ["technology"] }
-      #- { label: "Posizione categoria", name: "pos_cat", widget: "number" }
-      #- { label: "Posizione categoria", name: "pos_categories", widget: "relation", collection: "category", file: "category",  search_fields: ['category.*.order'], value_field: 'category.*.order', display_fields: ['category.*.order'], multiple: false, required: true }
+      - { label: "Section Label", name: "section_label", widget: "string" }
+      - { label: "Category id", name: "category_id", widget: "string" }
+      - { label: "Section key", name: "section_key", widget: "string" }
   # DOCS 
   - name: "docs"
     label: "Blog"
@@ -182,6 +180,11 @@ collections:
           - { label: Titolo, name: title, widget: string }
           - { label: Sottotitolo, name: subtitle, widget: string }
           - { label: 'N. post per categoria', name: limit, widget: number }
+          - label: "Home Widget"
+            name: "widget"
+            widget: "list"
+            fields:
+              - { label: Nome, name: name, widget: select, options: ['all_categories', 'category_and_article', 'No']  }
       - label: "Integrazione Tiledesk"
         name: "tiledesk"
         file: "_data/tiledesk.yml"
@@ -264,21 +267,9 @@ collections:
               - { label: Url, name: url, widget: string }
               - { label: Icon, name: icon, widget: image }
               - { label: Button Label, name: button_label, widget: string }
-              - { label: Description, name: Description, widget: string }
-              - { label: "Draft", name: "draft", widget: "boolean", default: false }
-      - label: "Help Center Sections"
-        name: "sections"
-        file: "_data/sections.yml"
-        fields:
-          - label: 'Section'
-            name: 'section'
-            widget: 'list'
-            collapsed: true
-            fields:
-              - { label: Key, name: key, widget: string }
-              - { label: Url, name: url, widget: string }
-              - { label: Nome, name: label, widget: string }
+              - { label: Description, name: description, widget: string }
               - { label: Draft, name: draft, widget: boolean, default: false }
+              - { label: Type, name: type, widget: string }
              
                   
               
