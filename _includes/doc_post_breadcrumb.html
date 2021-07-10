@@ -9,14 +9,18 @@
         <!--DEB2: {{section}}-->
         {% capture my_category_url %}{{ my_category.first.url}}{% endcapture %}
         {% capture my_section_url %}{{ my_section.first.url}}{% endcapture %}
-        <!--DEB2:{{my_category_url}}-->
         {% assign my_category_url = "/categories/" | append: my_category_url %}
         {% assign my_category_url_com = my_category_url | append: "/" %}
+        {% assign display_mode =  site.data.topicsarea.display_mode %}
         <li class="breadcrumb-item"><a href="{{  my_category_url_com | relative_url}}">{{ my_category.first.label | replace: '[', '' | replace: ']', '' | replace: '"', '' | replace: '_', ' '  }}</a></li>
-        {% assign my_section_url = "/categories/" | append: my_section_url %}
-        {% assign my_section_url_com = my_section_url | append: "/" %}
-        <li class="breadcrumb-item"><a href="{{  my_section_url_com | relative_url}}">{{ my_section.first.label | replace: '[', '' | replace: ']', '' | replace: '"', '' | replace: '_', ' '  }}</a></li>
-        {% assign my_category_section_url_complex = my_category_section_url_com | append: my_section_url %}
+        {% if display_mode == "all" or display_mode == "article_in_section" %}
+            {% if my_section_url != '' %}
+                {% assign my_section_url = "/categories/" | append: my_section_url %}
+                {% assign my_section_url_com = my_section_url | append: "/" %}
+                <li class="breadcrumb-item"><a href="{{  my_section_url_com | relative_url}}">{{ my_section.first.label | replace: '[', '' | replace: ']', '' | replace: '"', '' | replace: '_', ' '  }}</a></li>
+                {% assign my_category_section_url_complex = my_category_section_url_com | append: my_section_url %}
+            {% endif %}
+        {% endif %}
         <li class="breadcrumb-item active" aria-current="page">{{page.title}}</li>
     </ol>
 </nav>

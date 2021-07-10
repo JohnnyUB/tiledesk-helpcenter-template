@@ -370,6 +370,11 @@ it: &DEFAULT_IT
   search_algolia_no_results  :
   results_found              : "Risultati"
   back_to_top                : "Vai su"
+  section_category_onlysez   : "Le sezioni della categoria"
+  section_category_onlyart   : "Gli articoli della categoria"
+  section_no                 : "Nessun articolo associato alla sezione ..."
+  section_category_all       : "Gli articoli e le sezioni della categoria"
+  category_no                : "Crea un articolo in una categoria o sezione .."
 it-IT:
   <<: *DEFAULT_IT
 

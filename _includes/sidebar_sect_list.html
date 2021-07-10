@@ -9,8 +9,7 @@
     <!--PRENDO SOLO LE SEZIONI DELLA CATEGORIA-->
     <!-- DEB1:{{section_name}} -->
    {% assign my_sections =  site.data.category.category | where: 'url' , section_name | first %}
-   <!-- DEB2:{{my_sections.category_id}} -->
-   {% assign all_sections =  site.data.category.category | where: 'category_id' , my_sections.category_id %}
+   {% assign all_sections =  site.data.category.category | where: 'category_key' , my_sections.category_key %}
    <!--DEB3: {{all_sections}}-->
    {% for section in all_sections %}
    {% capture section_draft %}{{ section.draft}}{% endcapture %}

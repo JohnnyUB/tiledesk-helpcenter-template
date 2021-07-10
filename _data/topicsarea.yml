@@ -1,6 +1,7 @@
 title: Leggi l'articolo
 subtitle: Seleziona la Categoria
 limit: 8
+display_mode: article_in_section
 widget:
   - name: all_categories
   - name: category_and_article

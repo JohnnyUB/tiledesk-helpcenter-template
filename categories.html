@@ -10,48 +10,92 @@ keywords: "responsive,jekyll,minimal template"
             <div class="container">
                <div class="col">
                   <!--ELENCO DI TUTTE LE CATEGORIE-->
+                  {% assign article_number =  0 %}
                   {% for category in site.data.category.category %}
-                  {% capture category_name %}{{ category.key}}{% endcapture %}
-                  {% capture category_label %}{{ category.label}}{% endcapture %}
-                  {% capture category_draft %}{{ category.draft}}{% endcapture %}
-                  {% capture category_type %}{{ category.type}}{% endcapture %}
-                    {% if category_draft == "false" and category_type == '(categoria)' %}
+                     {% capture category_name %}{{ category.key}}{% endcapture %}
+                     {% capture category_label %}{{ category.label}}{% endcapture %}
+                     {% capture category_draft %}{{ category.draft}}{% endcapture %}
+                     {% capture category_type %}{{ category.type}}{% endcapture %}
+                     {% if category_draft == "false" and category_type == '(categoria)' and category.size > 0 %}
                      <div class="row">
                         <article class="topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
                            <header class="topics-title">
+                              <!--DEB1: {{category_name}}-->
+                              <!--CONTROLLO CHE CI SIA ALMENO UN ARTICOLO NELLA CATEGORIA-->
                               {% assign all_posts = site.categories[category_name] %}
                               {% assign my_category_url = "/categories/" | append: category.url %}
-                              <a href="{{ my_category_url  | relative_url }}"><h4 class="heading-4 text-capitalize">{{ category_label }} ({{all_posts.size}})</h4></a>
+                              {% if all_posts.size > 0  %}
+                              {% assign article_number = all_posts.size %}
+                                 <a href="{{ my_category_url  | relative_url }}"><h4 class="heading-4 text-capitalize">{{ category_label }} ({{all_posts.size}})</h4></a>
+                              {% else %}
+                                 <h4 class="heading-4 text-capitalize">{{ category_label }} ({{all_posts.size}})</h4>
+                              {% endif %}
                            </header>
+                           {% assign display_mode =  site.data.topicsarea.display_mode %}
+                           {% if display_mode == "article_in_category" %}
+                              <ul class="topics-list list-inline">
+                                 {% assign all_posts_of_category = site.categories[category_name] | where: 'category_key', nil  %}
+                                 <!--{% assign normal_posts = site.categories[category_name] %}-->
+                                 {% for doc_post in all_posts_of_category %}
+                                    {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                                    {% if post_draft == "false" %}
+                                    <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }} </a></li>
+                                    {% endif %}
+                                 {% endfor %}
+                              </ul>
+                           {% endif %}
+                           {% if display_mode == "all" %}
+                              <!--CICLO SU TUTTI GLI ARTICOLI DELLA CATEGORIA-->
+                              {% assign all_posts_of_category = site.categories[category_name] | where: 'category_key', nil  %}
+                              {% for post in all_posts_of_category %}
+                                 {% include archive-single.html %}
+                              {% endfor %}
+                           {% endif %}
                            <ul class="topics-list list-inline">
-                             <!--PRENDO TUTTE LE SEZIONI-->
-                             {% assign all_sections =  site.data.category.category | where: 'category_id' , category_name %}
-                             <!--CICLO SU TUTTE LE SEZIONI DELLA CATEGORIA-->
-                             {% for section in all_sections %}
-                                 <!--PRENDO TUTTE LE SEZIONI-->
-                                 {% if section !=  category_name %}
-                                 <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-                                    <h2 class="heading-5" itemprop="headline">
-                                    <!-- COSTRUISCO URL SEZIONE -->
-                                    {% capture section_url %}{{ '/categories/' | append: section.url }}{% endcapture %}
-                                    <a href="{{ section_url | relative_url }}" rel="permalink">{{section.label}}</a>
-                                    </h2>
-                                    <!--STAMPO GLI ARTICOLI DELLA SEZIONE-->
-                                    {% assign normal_posts = site.categories[section.key] %}
-                                    {% for doc_post in normal_posts %}
-                                       {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
-                                       {% if post_draft == "false" %}
-                                       <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }} </a></li>
+                             <!--PRENDO TUTTE LE SEZIONI SE SONO IN MODALITA' SEZIONI VISIBILI-->
+                             {% if display_mode == "all" or display_mode == "article_in_section" %}
+                              {% assign all_sections =  site.data.category.category | where: 'category_key' , category_name %}
+                              <!--CICLO SU TUTTE LE SEZIONI DELLA CATEGORIA-->
+                              {% for section in all_sections %}
+                                    <!--PRENDO TUTTE LE SEZIONI-->
+                                    {% capture section_key %}{{section.key}}{% endcapture %}
+                                    {% assign all_posts = site.categories[section_key] %}
+                                    {% if section !=  category_name %}
+                                    <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+                                       <h2 class="heading-5" itemprop="headline">
+                                       <!-- COSTRUISCO URL SEZIONE -->
+                                       {% capture section_url %}{{ '/categories/' | append: section.url }}{% endcapture %}
+                                       <!--CAPISCO SE LA SEZIONE CONTIENE O MENO ARTICOLI-->
+                                       {% if all_posts.size > 0 %}
+                                          <a href="{{ section_url | relative_url }}" rel="permalink">{{section.label}}</a>
+                                       {% else %}
+                                          {{section.label}}
                                        {% endif %}
-                                    {% endfor %}
-
-                                 {% endif %}
-                             {% endfor %}
+                                       </h2>
+                                       <!--STAMPO GLI ARTICOLI DELLA SEZIONE-->
+                                       {% assign normal_posts = site.categories[section.key] %}
+                                       {% for doc_post in normal_posts %}
+                                          {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                                          {% if post_draft == "false" %}
+                                          <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }} </a></li>
+                                          {% endif %}
+                                       {% endfor %}
+                                    {% endif %}
+                              {% endfor %}
+                             {% endif %}
                            </ul>
                         </article>
                      </div>
+                     {% endif %}
+                  {% endfor %}
+                  <!--DEB1:{{article_number}}-->
+                  {% if article_number == 0 %}
+                        <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+                        <h7 class="heading-7" itemprop="headline">
+                        <!-- MESSAGGIO NESSUNA SEZIONE-->
+                        {{site.data.ui-text[site.locale].category_no | default: "Crea un articolo in una categoria o sezione .." }}{{section.label}}
+                        </h7>
                   {% endif %}
-                  {% endfor %}			  
                </div>
             </div>
          </div>
