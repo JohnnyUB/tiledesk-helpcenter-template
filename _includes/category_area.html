@@ -23,15 +23,17 @@
                      <h4 class="heading-4 text-capitalize">{{ category_label }} ({{all_posts.size}})</h4> 
                      </header>
                      <ul class="topics-list list-inline">
-                        <!-- AGGIUNGERE IL CAMPO ORDER AL POST-->
-                        {% assign evidence_posts = site.categories[category_name] | where: "featured", true %}
-                        <!--nel widget nella home compaiono solo i post con featured = true-->
-                        {% for doc_post in evidence_posts %}
-                        {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
-                           {% if post_draft == "false" %}
-                        <li><a href="{{ doc_post.url | relative_url }}">{{ doc_post.title }} </a></li>
-                           {% endif %}
-                        {% endfor %}
+                        <!-- AGGIUNGERE IL CAMPO ORDER AL POST - CONTROLLA CHE CI SIA ALMENTO UN POST NELLA CATEGORIA-->
+                        {% if all_posts.size > 0 %}
+                           {% assign evidence_posts = site.categories[category_name] | where: "featured", true | sort: "order" %}
+                           <!--nel widget nella home compaiono solo i post con featured = true-->
+                           {% for doc_post in evidence_posts %}
+                           {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                              {% if post_draft == "false" %}
+                           <li><a href="{{ doc_post.url | relative_url }}">{{ doc_post.title }} </a></li>
+                              {% endif %}
+                           {% endfor %}
+                        {% endif %}
                         <!--
                         {% assign normal_posts = site.categories[category_name] | where: "featured", false %}
                         {% for doc_post in normal_posts limit: site.data.topicsarea.limit %}

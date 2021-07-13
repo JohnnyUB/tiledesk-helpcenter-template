@@ -35,21 +35,25 @@ keywords: "responsive,jekyll,minimal template"
                            {% if display_mode == "article_in_category" %}
                               <ul class="topics-list list-inline">
                                  {% assign all_posts_of_category = site.categories[category_name] | where: 'category_key', nil  %}
-                                 <!--{% assign normal_posts = site.categories[category_name] %}-->
-                                 {% for doc_post in all_posts_of_category %}
-                                    {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
-                                    {% if post_draft == "false" %}
-                                    <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }} </a></li>
-                                    {% endif %}
-                                 {% endfor %}
+                                 {% if all_posts_of_category.size > 0 %}
+                                 {% assign all_posts_of_category_ord = site.categories[category_name] | where: 'category_key', nil | sort: "order"  %}
+                                    {% for doc_post in all_posts_of_category_ord %}
+                                       {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                                       {% if post_draft == "false" %}
+                                       <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }} </a></li>
+                                       {% endif %}
+                                    {% endfor %}
+                                 {% endif %}
                               </ul>
                            {% endif %}
                            {% if display_mode == "all" %}
                               <!--CICLO SU TUTTI GLI ARTICOLI DELLA CATEGORIA-->
-                              {% assign all_posts_of_category = site.categories[category_name] | where: 'category_key', nil  %}
-                              {% for post in all_posts_of_category %}
-                                 {% include archive-single.html %}
-                              {% endfor %}
+                              {% if all_posts_of_category.size > 0 %}
+                              {% assign all_posts_of_category_ord = site.categories[category_name] | where: 'category_key', nil  | sort: "order" %}
+                                 {% for post in all_posts_of_category_ord %}
+                                    {% include archive-single.html %}
+                                 {% endfor %}
+                              {% endif %}
                            {% endif %}
                            <ul class="topics-list list-inline">
                              <!--PRENDO TUTTE LE SEZIONI SE SONO IN MODALITA' SEZIONI VISIBILI-->
@@ -74,12 +78,15 @@ keywords: "responsive,jekyll,minimal template"
                                        </h2>
                                        <!--STAMPO GLI ARTICOLI DELLA SEZIONE-->
                                        {% assign normal_posts = site.categories[section.key] %}
-                                       {% for doc_post in normal_posts %}
-                                          {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
-                                          {% if post_draft == "false" %}
-                                          <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }} </a></li>
-                                          {% endif %}
-                                       {% endfor %}
+                                       {% if normal_posts.size > 0 %}
+                                       {% assign normal_posts_ord = site.categories[section.key] | sort: "order" %}
+                                          {% for doc_post in normal_posts_ord %}
+                                             {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                                             {% if post_draft == "false" %}
+                                             <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }} </a></li>
+                                             {% endif %}
+                                          {% endfor %}
+                                       {% endif %}
                                     {% endif %}
                               {% endfor %}
                              {% endif %}
