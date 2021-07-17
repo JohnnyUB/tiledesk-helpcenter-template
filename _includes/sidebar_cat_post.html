@@ -1,25 +1,37 @@
 <!--ELENCO NUOVI POST SULLA SPALLA A DX-->
 <div class="sidebar-area sidebar-right">
-{% assign category_name = site.data.category.category | where: "key", "getting_started_for_admins"  %}
-{% capture category_label %}{{ category_name[0].label}}{% endcapture %}
+<!--RIMUOVO DALL'URL /CATEGORIES/-->
+{% capture category_n %}{{ page.url | remove: page.title}}{% endcapture %}
+{% capture category_nam %}{{ category_n | remove: "/"}}{% endcapture %}
+{% assign category_name = site.data.category.category | where: "key", category_nam | first %}
+{% capture category_label %}{{ category_name.label}}{% endcapture %}
 <h5 class="sub-title heading-5">Category post: {{category_label}}</h5>
 <div class="recent-widget sidebar-widget">
-  {% capture category_key %}{{page.categories}}{% endcapture %}
-  {% assign all_posts = site.categories[category_key] %}
+  {% capture category_key %}{{category_name.key}}{% endcapture %}
+  {% assign all_posts = site.categories[category_key] | where: 'draft' ,'false' %}
   {% if all_posts.size > 0 %}
-   {% assign all_posts_ord = site.categories[category_key] | sort: "order" %}
+   {% assign all_posts_ord = site.categories[category_key] | where: 'draft' ,'false' | sort: "order" %}
    {% for post in all_posts_ord %}
-      <div class="recent-wrapper">
-         <a class="recent-img">
-         <img src="{{post.post_image | relative_url}}" alt="{{post.title}}">
-         </a>
-         <div class="recent-details">
-            <h6 class="heading-6"> <a href="{{post.url | relative_url}}">{{post.title}}</a> </h6>
-            <ul class="recent-meta list-inline">
-               <li class="list-inline-item">{{post.date | date_to_long_string}}</li>
-            </ul>
+      <!--CAPISCO SE LA SEZIONE E' DRAFT-->
+      {% capture section_post %}{{ post.categories[1]}}{% endcapture %}
+      {% if section_post != nil  %}  
+         {% assign section = site.data.category.category | where: 'key' ,section_post | where: 'type' , '(sezione)' | first%}
+         {% capture section_draft %}{{ section.draft}}{% endcapture %}
+         {% if section_draft == "false" or section_draft == ""  %}  
+         <!--CAPISCO SE IL POST E' DRAFT-->  
+         <div class="recent-wrapper">
+            <a class="recent-img">
+            <img src="{{post.post_image | relative_url}}" alt="{{post.title}}">
+            </a>
+            <div class="recent-details">
+               <h6 class="heading-6"> <a href="{{post.url | relative_url}}">{{post.title}}</a> </h6>
+               <ul class="recent-meta list-inline">
+                  <li class="list-inline-item">{{post.date | date_to_long_string}}</li>
+               </ul>
+            </div>
          </div>
-      </div>
+         {% endif %}
+      {% endif %}  
    {% endfor %}
   {% endif %}
 </div>

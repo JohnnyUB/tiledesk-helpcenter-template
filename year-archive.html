@@ -9,25 +9,66 @@ keywords: "responsive,jekyll,minimal template"
          <div class="topics-wrapper section-spacing bminus-30">
             <div class="container">
                <div class="col">
-                  {%- assign posts = site.posts  -%}
+                  {%- assign posts = site.posts | where: 'draft' ,'false'  -%}
                   {%- assign groupedByYear = posts | group_by_exp:"post","post.date | date:'%Y' " -%}
-                  total posts: {{ posts.size }}
-            
                   {%- for yearitem in groupedByYear -%}
+                   <!--CONTATORE POST-->
+                   {% assign posts_number = 0  %}
+                   {%- for item in yearitem.items -%}
+                      <!--CAPISCO SE LA CATEGORIA E' DRAFT-->
+                      {% capture category_post %}{{ item.categories[0]}}{% endcapture %}
+                      {% if category_post != nil  %}  
+                         {% assign category = site.data.category.category | where: 'key' ,category_post | where: 'type' , '(categoria)' | first%}
+                         {% capture category_draft %}{{ category.draft}}{% endcapture %}
+                         {% if category_draft == "false" %}  
+                            <!--CAPISCO SE LA SEZIONE E' DRAFT-->
+                            {% capture section_post %}{{ item.categories[1]}}{% endcapture %}
+                            {% if section_post != nil  %}  
+                               {% assign section = site.data.category.category | where: 'key' ,section_post | where: 'type' , '(sezione)' | first%}
+                               {% capture section_draft %}{{ section.draft}}{% endcapture %}
+                               {% if section_draft == "false" or section_draft == ""  %}  
+                                  <!--CAPISCO SE IL POST E' DRAFT-->
+                                  {% capture post_draft %}{{ item.draft}}{% endcapture %}
+                                  {% if post_draft == "false" %}
+                                  {% assign posts_number = posts_number | plus:  1  %}
+                                  {% endif %}
+                               {% endif %}
+                            {% endif %}
+                         {% endif %}
+                      {% endif %}       
+                   {% endfor %}	  
+                <!--FINE CONTATORE POST-->
                      <div class="row">
                         <article class="topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
                            <header class="topics-title">
-                              <h4 class="heading-4 text-capitalize">{{ yearitem.name }} ({{yearitem.size}})</h4>
+                              <h4 class="heading-4 text-capitalize">{{ yearitem.name }} ({{posts_number}})</h4>
                            </header>
                            <ul class="topics-list list-inline">
                               {%- for item in yearitem.items -%}
-                                 {% capture post_draft %}{{ item.draft}}{% endcapture %}
-                                 {% if post_draft == "false" %}
-                                 <li>
-                                    <date>{{ item.date | date:'%B %e'}}</date>
-                                    <span><a href="{{ item.url | relative_url}}">{{ item.title }}</a></span>
-                                 </li>
-                                 {% endif %}  
+                                 <!--CAPISCO SE LA CATEGORIA E' DRAFT-->
+                                 {% capture category_post %}{{ item.categories[0]}}{% endcapture %}
+                                 {% if category_post != nil  %}  
+                                    {% assign category = site.data.category.category | where: 'key' ,category_post | where: 'type' , '(categoria)' | first%}
+                                    {% capture category_draft %}{{ category.draft}}{% endcapture %}
+                                    {% if category_draft == "false" %}  
+                                       <!--CAPISCO SE LA SEZIONE E' DRAFT-->
+                                       {% capture section_post %}{{ item.categories[1]}}{% endcapture %}
+                                       {% if section_post != nil  %}  
+                                          {% assign section = site.data.category.category | where: 'key' ,section_post | where: 'type' , '(sezione)' | first%}
+                                          {% capture section_draft %}{{ section.draft}}{% endcapture %}
+                                          {% if section_draft == "false" or section_draft == ""  %}  
+                                             <!--CAPISCO SE IL POST E' DRAFT-->
+                                             {% capture post_draft %}{{ item.draft}}{% endcapture %}
+                                             {% if post_draft == "false" %}
+                                             <li>
+                                                <date>{{ item.date | date:'%B %e'}}</date>
+                                                <span><a href="{{ item.url | relative_url}}">{{ item.title }}</a></span>
+                                             </li>
+                                             {% endif %}
+                                          {% endif %}
+                                       {% endif %}
+                                    {% endif %}
+                                 {% endif %}       
                               {% endfor %}
                            </ul>
                         </article>

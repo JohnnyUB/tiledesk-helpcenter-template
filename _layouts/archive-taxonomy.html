@@ -41,14 +41,13 @@ author_profile: false
                      <h5 class="heading-6">{{site.data.ui-text[site.locale].section_category_onlysez | default: "Le sezioni della categoria" }} {{page_tit.label | replace: '_', '-' }}</h5>
                   {% endif %}
                   <!--PRENDO TUTTE LE CATEGORIE-->
-                  <!-- {% assign all_categories = site.categories[category_name] | map: "categories" | uniq %} -->
-                  {% assign all_categories =  site.data.category.category | where: 'category_key' , category_name %}
+                  {% assign all_categories =  site.data.category.category | where: 'category_key' , category_name | where: 'draft' ,'false'%}
                   <article class="post topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
                   {% if display_mode == "article_in_category" %}
                      <!--CICLO SU TUTTI GLI ARTICOLI DELLA CATEGORIA-->
-                     {% assign all_posts_of_category = site.categories[category_name] | where: 'category_key', nil  %}
+                     {% assign all_posts_of_category = site.categories[category_name] | where: 'category_key', nil | where: 'draft' ,'false'  %}
                      {% if all_posts_of_category.size > 0 %}
-                        {% assign all_posts_of_category_ord = site.categories[category_name] | where: 'category_key', nil | sort: "order" %}
+                        {% assign all_posts_of_category_ord = site.categories[category_name] | where: 'category_key', nil | where: 'draft' ,'false' | sort: "order"  %}
                         <div class="container">
                            <div class="row">
                               <div class="col-md-7 col-lg-8">
@@ -62,9 +61,9 @@ author_profile: false
                   {% endif %}
                   {% if display_mode == "all" %}
                      <!--CICLO SU TUTTI GLI ARTICOLI DELLA CATEGORIA-->
-                     {% assign all_posts_of_category = site.categories[category_name] | where: 'category_key', nil %}
+                     {% assign all_posts_of_category = site.categories[category_name] | where: 'category_key', nil | where: 'draft' ,'false' | %}
                      {% if all_posts_of_category.size > 0 %}
-                     {% assign all_posts_of_category_ord = site.categories[category_name] | where: 'category_key', nil | sort: "order"  %}
+                     {% assign all_posts_of_category_ord = site.categories[category_name] | where: 'category_key', nil | where: 'draft' ,'false' | sort: "order"  %}
                         {% for post in all_posts_of_category_ord %}
                            {% include archive-single.html %}
                         {% endfor %}
@@ -75,7 +74,7 @@ author_profile: false
                      {% for section in all_categories %}
                         <!--PRENDO TUTTE LE SEZIONI-->
                         {% capture section_key %}{{section.key}}{% endcapture %}
-                        {% assign all_posts = site.categories[section_key] %}
+                        {% assign all_posts = site.categories[section_key] | where: 'draft' ,'false' %}
                         <!--SE UNA SEZIONE CONTIENE ALMENO UN ARTICOLO-->
                         {% if section !=  category_name and all_posts.size > 0 %}
                            <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
@@ -99,9 +98,9 @@ author_profile: false
                  <!-- SE MI TROVO IN UNA SEZIONE-->
                  <h4 class="heading-4">Gli articoli della sezione {{page_tit.label | replace: '_', '-' }}</h4>
                   <!--PRENDO TUTTI GLI ARTICOLI-->
-                  {% assign my_posts_section = site.categories[cat-sez.key] | where: 'category_key',cat-sez.category_key %}
+                  {% assign my_posts_section = site.categories[cat-sez.key] | where: 'category_key',cat-sez.category_key | where: 'draft' ,'false' %}
                   {% if my_posts_section.size > 0 %}
-                     {% assign my_posts_section_ord = site.categories[cat-sez.key] | where: 'category_key',cat-sez.category_key | sort: "order" %}
+                     {% assign my_posts_section_ord = site.categories[cat-sez.key] | where: 'category_key',cat-sez.category_key | where: 'draft' ,'false' | sort: "order" %}
                      <article class="post topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
                      <!--CICLO SU TUTTI GLI ARTICOLI DELLA SEZIONE-->
                         {% for post in my_posts_section_ord %}

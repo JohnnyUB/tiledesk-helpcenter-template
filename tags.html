@@ -6,32 +6,82 @@ description: "Meta description for Support page"
 keywords: "responsive,jekyll,minimal template"
 ---
 <div class="topics-area bg-color1">
-         <div class="topics-wrapper section-spacing bminus-30">
-            <div class="container">
-               <div class="col">
+   <div class="topics-wrapper section-spacing bminus-30">
+      <div class="container">
+         <div class="col">
 			{% assign my_doc_tags =  site.posts | map: 'tags' | join: ','  | split: ',' | uniq %}
-            {% for tag in my_doc_tags %}
+         {% for tag in my_doc_tags %}
+         <!--CONTATORE POST-->
+         {% assign posts_number = 0  %}
+            {%- assign posts = site.posts | where: 'draft' ,'false'  -%}
+            {% for doc_post in posts %}
+               {% if doc_post.tags contains tag %}
+                  <!--CONTROLLO CHE LA CATEGORIA NN SIA DRAFT-->
+                  {% capture category_post %}{{ doc_post.categories[0]}}{% endcapture %}
+                  {% if category_post != nil  %}  
+                     {% assign category = site.data.category.category | where: 'key' ,category_post | where: 'type' , '(categoria)' | first%}
+                     {% capture category_draft %}{{ category.draft}}{% endcapture %}
+                     {% if category_draft == "false" %}
+                        <!--CAPISCO SE LA SEZIONE E' DRAFT-->
+                        {% capture section_post %}{{ doc_post.categories[1]}}{% endcapture %}
+                        {% if section_post != nil  %}  
+                           {% assign section = site.data.category.category | where: 'key' ,section_post | where: 'type' , '(sezione)' | first%}
+                           {% capture section_draft %}{{ section.draft}}{% endcapture %}
+                           {% if section_draft == "false" or section_draft == ""  %}   
+                              <!--CONTROLLO CHE IL POST NN SIA DRAFT-->
+                              {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                              {% if post_draft == "false" %}
+                                 {% assign posts_number = posts_number | plus:  1  %}
+                              {% endif %}
+                           {% endif %}
+                        {% endif %}
+                     {% endif %}
+                  {% endif %}
+               {% endif %}
+            {% endfor %}	  
+          <!--FINE CONTATORE POST-->
 				<div class="col-md-6 col-lg-4">
+               <!--CONTROLLO CHE CI SIA ALMENO UN ARTICOLO NEL TAG-->
+               {% if posts_number != 0 %}
 					<article class="topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
 						<header class="topics-title">
-							<h4 class="heading-4 text-capitalize">{{ tag }} </h4>
+							<h4 class="heading-4 text-capitalize">{{ tag }} ({{posts_number}})</h4>
 						</header>
 						<ul class="topics-list list-inline">
-                     {% for doc_post in site.posts %}
+                  {%- assign posts = site.posts | where: 'draft' ,'false'  -%}
+                  {% for doc_post in posts %}
                      {% if doc_post.tags contains tag %}
-                     {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
-                     {% if post_draft == "false" %}
-                     <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }} </a></li>
+                        <!--CONTROLLO CHE LA CATEGORIA NN SIA DRAFT-->
+                        {% capture category_post %}{{ doc_post.categories[0]}}{% endcapture %}
+                        {% if category_post != nil  %}  
+                           {% assign category = site.data.category.category | where: 'key' ,category_post | where: 'type' , '(categoria)' | first%}
+                           {% capture category_draft %}{{ category.draft}}{% endcapture %}
+                           {% if category_draft == "false" %}
+                              <!--CAPISCO SE LA SEZIONE E' DRAFT-->
+                              {% capture section_post %}{{ doc_post.categories[1]}}{% endcapture %}
+                              {% if section_post != nil  %}  
+                                 {% assign section = site.data.category.category | where: 'key' ,section_post | where: 'type' , '(sezione)' | first%}
+                                 {% capture section_draft %}{{ section.draft}}{% endcapture %}
+                                 {% if section_draft == "false" or section_draft == ""  %}   
+                                    <!--CONTROLLO CHE IL POST NN SIA DRAFT-->
+                                    {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                                    {% if post_draft == "false" %}
+                                       <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }}</a></li>
+                                    {% endif %}
+                                 {% endif %}
+                              {% endif %}
+                           {% endif %}
+                        {% endif %}
                      {% endif %}
-                     {% endif %}
-                     {% endfor %}
+                  {% endfor %}
                   </ul>
 					</article>
+               {% endif %}
 				</div>
-				{% endfor %}			  
-               </div>
-            </div>
+			{% endfor %}			  
          </div>
       </div>
+   </div>
+</div>
 </section>
 <!-- End Topics Area -->

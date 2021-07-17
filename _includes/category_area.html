@@ -17,36 +17,68 @@
                 {% capture category_draft %}{{ category.draft}}{% endcapture %}
                 {% capture category_type %}{{ category.type}}{% endcapture %}
                 {% if category_draft == "false" and category_type == '(categoria)' %}
+                <!--CONTATORE POST IN CATEGORIA-->
+                {% assign all_posts = site.categories[category_name] | where: 'draft' ,'false' %}
+                {% if all_posts.size > 0 %}
+                {% assign posts_number = 0  %}
+                <!--STAMPO POST DELLA CATEGORIA-->
+                   {% assign evidence_posts_cat = site.posts | where: 'categories' , category_name | where: "featured", true | where: 'draft' ,'false' | where: 'category_key', nil | sort: "order" %}
+                   <!--nel widget nella home compaiono solo i post con featured = true e draft = false-->
+                   {% for doc_post in evidence_posts_cat %}
+                   {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                      {% if post_draft == "false" %}
+                      {% assign posts_number = posts_number | plus:  1  %}
+                      {% endif %}
+                   {% endfor %}
+                <!--STAMPO POST DELLE SEZIONI-->
+                   {% assign evidence_posts_sez = site.posts | where: 'categories' , category_name | where: "featured", true | where: 'draft' ,'false' | where: 'category_key', category_name | sort: "order" %}
+                   <!--nel widget nella home compaiono solo i post con featured = true e draft = false-->
+                   {% for doc_post in evidence_posts_sez %}
+                      {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                      {% capture name_section %}{{ doc_post.categories[1]}}{% endcapture %}
+                      {% assign section = site.data.category.category | where: 'key', name_section | where: 'type' ,'(sezione)' | first %}
+                      {% capture section_draft %}{{ section.draft}}{% endcapture %}
+                      {% if section_draft == "false" %}
+                         {% if post_draft == "false" %}
+                         <!--CONTA I POST NELLA CATEGORIA-->
+                         {% assign posts_number = posts_number | plus:  1  %}
+                         {% endif %}
+                      {% endif %}
+                   {% endfor %}
+                {% endif %}
+                <!--FINE CONTATORE POST IN CATEGORIA-->
                <article class="post topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
                      <header class="topics-title">
-                        {% assign all_posts = site.categories[category_name] %}
-                     <h4 class="heading-4 text-capitalize">{{ category_label }} ({{all_posts.size}})</h4> 
+                        {% assign all_posts = site.categories[category_name] | where: 'draft' ,'false' %}
+                     <h4 class="heading-4 text-capitalize">{{ category_label }} ({{posts_number}})</h4> 
                      </header>
                      <ul class="topics-list list-inline">
                         <!-- AGGIUNGERE IL CAMPO ORDER AL POST - CONTROLLA CHE CI SIA ALMENTO UN POST NELLA CATEGORIA-->
                         {% if all_posts.size > 0 %}
-                           {% assign evidence_posts = site.categories[category_name] | where: "featured", true | sort: "order" %}
-                           <!--nel widget nella home compaiono solo i post con featured = true-->
-                           {% for doc_post in evidence_posts %}
+                        <!--STAMPO POST DELLA CATEGORIA-->
+                           {% assign evidence_posts_cat = site.posts | where: 'categories' , category_name | where: "featured", true | where: 'draft' ,'false' | where: 'category_key', nil | sort: "order" %}
+                           <!--nel widget nella home compaiono solo i post con featured = true e draft = false-->
+                           {% for doc_post in evidence_posts_cat %}
                            {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
                               {% if post_draft == "false" %}
-                           <li><a href="{{ doc_post.url | relative_url }}">{{ doc_post.title }} </a></li>
+                              <li><a href="{{ doc_post.url | relative_url }}">{{ doc_post.title }} </a></li>
+                              {% endif %}
+                           {% endfor %}
+                        <!--STAMPO POST DELLE SEZIONI-->
+                           {% assign evidence_posts_sez = site.posts | where: 'categories' , category_name | where: "featured", true | where: 'draft' ,'false' | where: 'category_key', category_name | sort: "order" %}
+                           <!--nel widget nella home compaiono solo i post con featured = true e draft = false-->
+                           {% for doc_post in evidence_posts_sez %}
+                              {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                              {% capture name_section %}{{ doc_post.categories[1]}}{% endcapture %}
+                              {% assign section = site.data.category.category | where: 'key', name_section | where: 'type' ,'(sezione)' | first %}
+                              {% capture section_draft %}{{ section.draft}}{% endcapture %}
+                              {% if section_draft == "false" %}
+                                 {% if post_draft == "false" %}
+                                 <li><a href="{{ doc_post.url | relative_url }}">{{ doc_post.title }} </a></li>
+                                 {% endif %}
                               {% endif %}
                            {% endfor %}
                         {% endif %}
-                        <!--
-                        {% assign normal_posts = site.categories[category_name] | where: "featured", false %}
-                        {% for doc_post in normal_posts limit: site.data.topicsarea.limit %}
-                        {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
-                        {% if post_draft == "false" %}
-                        <li><a href="{{ doc_post.url | relative_url }}">{{ doc_post.title }} </a></li>
-                           {% endif %}
-                        {% endfor %}
-                        -->
-                      <!--  {% for doc_post in site.categories[category_name] limit: site.data.topicsarea.limit %}
-                        <li><a href="{{ doc_post.url | relative_url }}">{{ doc_post.title }} </a></li>
-                        {% endfor %}
-                        -->
                      </ul>
                </article>  
                {% endif %}

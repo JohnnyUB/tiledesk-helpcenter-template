@@ -17,26 +17,77 @@ keywords: "responsive,jekyll,minimal template"
                      {% capture category_draft %}{{ category.draft}}{% endcapture %}
                      {% capture category_type %}{{ category.type}}{% endcapture %}
                      {% if category_draft == "false" and category_type == '(categoria)' and category.size > 0 %}
+                     {% assign display_mode =  site.data.topicsarea.display_mode %}
+                     <!--CONTATORE POST DELLA CATEGORIA-->
+                     {% assign article_number =  0 %}
+                     {% assign all_posts_of_category = site.categories[category_name] | where: 'category_key', nil | where: 'draft' ,'false' %}
+                           {% if display_mode == "article_in_category" %}
+                                 {% if all_posts_of_category.size > 0 %}
+                                 {% assign all_posts_of_category_ord = site.categories[category_name] | where: 'category_key', nil | where: 'draft' ,'false' | sort: "order"  %}
+                                    {% for doc_post in all_posts_of_category_ord %}
+                                       {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                                       {% if post_draft == "false" %}
+                                          <!--CONTA POST NELLA CATEGORIA-->
+                                          {% assign article_number = article_number | plus:  1  %}
+                                       {% endif %}
+                                    {% endfor %}
+                                 {% endif %}
+                           {% endif %}
+                           {% if display_mode == "all" %}
+                              <!--CICLO SU TUTTI GLI ARTICOLI DELLA CATEGORIA-->
+                              {% if all_posts_of_category.size > 0 %}
+                              {% assign all_posts_of_category_ord = site.categories[category_name] | where: 'category_key', nil | where: 'draft' ,'false'  | sort: "order" %}
+                                 {% for post in all_posts_of_category_ord %}
+                                  <!--CONTA POST NELLA CATEGORIA-->
+                                 {% assign article_number = article_number | plus:  1  %}
+                                 {% endfor %}
+                              {% endif %}
+                           {% endif %}
+                           <!--PRENDO TUTTE LE SEZIONI SE SONO IN MODALITA' SEZIONI VISIBILI-->
+                           {% if display_mode == "all" or display_mode == "article_in_section" %}
+                           {% assign all_sections =  site.data.category.category | where: 'category_key' , category_name | where: 'draft' ,'false' %}
+                           <!--CICLO SU TUTTE LE SEZIONI DELLA CATEGORIA-->
+                           {% for section in all_sections %}
+                                 <!--PRENDO TUTTE LE SEZIONI-->
+                                 {% capture section_key %}{{section.key}}{% endcapture %}
+                                 {% assign all_posts = site.categories[section_key] | where: 'draft' ,'false' %}
+                                 {% if section !=  category_name %}     
+                                    <!--STAMPO GLI ARTICOLI DELLA SEZIONE-->
+                                    {% assign normal_posts = site.categories[section.key] | where: 'draft' ,'false' %}
+                                    {% if normal_posts.size > 0 %}
+                                    {% assign normal_posts_ord = site.categories[section.key] | where: 'draft' ,'false' | sort: "order" %}
+                                       {% for doc_post in normal_posts_ord %}
+                                          {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
+                                          {% if post_draft == "false" %}
+                                             <!--CONTA POST NELLA SEZIONE-->
+                                             {% assign article_number = article_number | plus:  1  %}
+                                          {% endif %}
+                                       {% endfor %}
+                                    {% endif %}
+                                 {% endif %}
+                           {% endfor %}
+                        {% endif %}
+
+                     <!--FINE CONTATORE-->
                      <div class="row">
                         <article class="topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
                            <header class="topics-title">
                               <!--DEB1: {{category_name}}-->
                               <!--CONTROLLO CHE CI SIA ALMENO UN ARTICOLO NELLA CATEGORIA-->
-                              {% assign all_posts = site.categories[category_name] %}
+                              {% assign all_posts = site.categories[category_name] | where: 'draft' ,'false' %}
                               {% assign my_category_url = "/categories/" | append: category.url %}
-                              {% if all_posts.size > 0  %}
-                              {% assign article_number = all_posts.size %}
-                                 <a href="{{ my_category_url  | relative_url }}"><h4 class="heading-4 text-capitalize">{{ category_label }} ({{all_posts.size}})</h4></a>
+                              {% if article_number > 0  %}
+                                 <a href="{{ my_category_url  | relative_url }}"><h4 class="heading-4 text-capitalize">{{ category_label }} ({{article_number}})</h4></a>
                               {% else %}
-                                 <h4 class="heading-4 text-capitalize">{{ category_label }} ({{all_posts.size}})</h4>
+                                 <h4 class="heading-4 text-capitalize">{{ category_label }} ({{article_number}})</h4>
                               {% endif %}
                            </header>
-                           {% assign display_mode =  site.data.topicsarea.display_mode %}
+                           <!--{% assign display_mode =  site.data.topicsarea.display_mode %}-->
+                           {% assign all_posts_of_category = site.categories[category_name] | where: 'category_key', nil | where: 'draft' ,'false' %}
                            {% if display_mode == "article_in_category" %}
                               <ul class="topics-list list-inline">
-                                 {% assign all_posts_of_category = site.categories[category_name] | where: 'category_key', nil  %}
                                  {% if all_posts_of_category.size > 0 %}
-                                 {% assign all_posts_of_category_ord = site.categories[category_name] | where: 'category_key', nil | sort: "order"  %}
+                                 {% assign all_posts_of_category_ord = site.categories[category_name] | where: 'category_key', nil | where: 'draft' ,'false' | sort: "order"  %}
                                     {% for doc_post in all_posts_of_category_ord %}
                                        {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
                                        {% if post_draft == "false" %}
@@ -49,21 +100,23 @@ keywords: "responsive,jekyll,minimal template"
                            {% if display_mode == "all" %}
                               <!--CICLO SU TUTTI GLI ARTICOLI DELLA CATEGORIA-->
                               {% if all_posts_of_category.size > 0 %}
-                              {% assign all_posts_of_category_ord = site.categories[category_name] | where: 'category_key', nil  | sort: "order" %}
+                              {% assign all_posts_of_category_ord = site.categories[category_name] | where: 'category_key', nil | where: 'draft' ,'false'  | sort: "order" %}
+                              <ul class="topics-list list-inline">
                                  {% for post in all_posts_of_category_ord %}
-                                    {% include archive-single.html %}
+                                    <li><a href="{{ post.url  | relative_url }}">{{ post.title }} </a></li>  
                                  {% endfor %}
                               {% endif %}
+                              </ul>
                            {% endif %}
                            <ul class="topics-list list-inline">
                              <!--PRENDO TUTTE LE SEZIONI SE SONO IN MODALITA' SEZIONI VISIBILI-->
                              {% if display_mode == "all" or display_mode == "article_in_section" %}
-                              {% assign all_sections =  site.data.category.category | where: 'category_key' , category_name %}
+                              {% assign all_sections =  site.data.category.category | where: 'category_key' , category_name | where: 'draft' ,'false' %}
                               <!--CICLO SU TUTTE LE SEZIONI DELLA CATEGORIA-->
                               {% for section in all_sections %}
                                     <!--PRENDO TUTTE LE SEZIONI-->
                                     {% capture section_key %}{{section.key}}{% endcapture %}
-                                    {% assign all_posts = site.categories[section_key] %}
+                                    {% assign all_posts = site.categories[section_key] | where: 'draft' ,'false' %}
                                     {% if section !=  category_name %}
                                     <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
                                        <h2 class="heading-5" itemprop="headline">
@@ -77,9 +130,9 @@ keywords: "responsive,jekyll,minimal template"
                                        {% endif %}
                                        </h2>
                                        <!--STAMPO GLI ARTICOLI DELLA SEZIONE-->
-                                       {% assign normal_posts = site.categories[section.key] %}
+                                       {% assign normal_posts = site.categories[section.key] | where: 'draft' ,'false' %}
                                        {% if normal_posts.size > 0 %}
-                                       {% assign normal_posts_ord = site.categories[section.key] | sort: "order" %}
+                                       {% assign normal_posts_ord = site.categories[section.key] | where: 'draft' ,'false' | sort: "order" %}
                                           {% for doc_post in normal_posts_ord %}
                                              {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
                                              {% if post_draft == "false" %}
