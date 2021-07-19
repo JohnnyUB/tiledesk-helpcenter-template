@@ -10,6 +10,8 @@ backend:
 # one is running (yarn start-netlify, which uses netlify-cms-proxy-server).
 # when using the default proxy server port
 local_backend: true #--PRODUZIONE false
+#url: http://localhost:8082/api/v1
+#allowed_hosts: ['127.0.0.1']
   #branch: master # Branch to update (optional; defaults to master)
 # This line should *not* be indented
 media_folder: "images/uploads" # Media files will be stored in the repo under images/uploads

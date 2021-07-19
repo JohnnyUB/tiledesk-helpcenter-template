@@ -1,9 +1,14 @@
 <!--ELENCO NUOVI POST SULLA SPALLA A DX-->
 <div class="sidebar-area sidebar-right">
 <!--RIMUOVO DALL'URL /CATEGORIES/-->
+DEB0: {{page.url}}
+DEB1: {{site.baseurl}}
 {% capture category_n %}{{ page.url | remove: page.title}}{% endcapture %}
+DEB2: {{category_n}}
 {% capture category_nam %}{{ category_n | remove: "/"}}{% endcapture %}
+DEB3: {{category_nam}}
 {% assign category_name = site.data.category.category | where: "key", category_nam | first %}
+DEB4: {{category_name.label}}
 {% capture category_label %}{{ category_name.label}}{% endcapture %}
 <h5 class="sub-title heading-5">Category post: {{category_label}}</h5>
 <div class="recent-widget sidebar-widget">
