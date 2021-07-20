@@ -77,9 +77,9 @@ keywords: "responsive,jekyll,minimal template"
                               {% assign all_posts = site.categories[category_name] | where: 'draft' ,'false' %}
                               {% assign my_category_url = "/categories/" | append: category.url %}
                               {% if article_number > 0  %}
-                                 <a href="{{ my_category_url  | relative_url }}"><h4 class="heading-4 text-capitalize">{{ category_label }} ({{article_number}})</h4></a>
+                                 <a href="{{ my_category_url  | relative_url }}"><h5 class="heading-5 text-capitalize">{{ category_label }} ({{article_number}})</h5></a>
                               {% else %}
-                                 <h4 class="heading-4 text-capitalize">{{ category_label }} ({{article_number}})</h4>
+                                 <h5 class="heading-5 text-capitalize">{{ category_label }} ({{article_number}})</h5>
                               {% endif %}
                            </header>
                            <!--{% assign display_mode =  site.data.topicsarea.display_mode %}-->
@@ -119,16 +119,17 @@ keywords: "responsive,jekyll,minimal template"
                                     {% assign all_posts = site.categories[section_key] | where: 'draft' ,'false' %}
                                     {% if section !=  category_name %}
                                     <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-                                       <h2 class="heading-5" itemprop="headline">
+                                       <h6 class="heading-6" itemprop="headline">
                                        <!-- COSTRUISCO URL SEZIONE -->
                                        {% capture section_url %}{{ '/categories/' | append: section.url }}{% endcapture %}
                                        <!--CAPISCO SE LA SEZIONE CONTIENE O MENO ARTICOLI-->
                                        {% if all_posts.size > 0 %}
+                                          <hr>
                                           <a href="{{ section_url | relative_url }}" rel="permalink">{{section.label}}</a>
                                        {% else %}
                                           {{section.label}}
                                        {% endif %}
-                                       </h2>
+                                       </h6>
                                        <!--STAMPO GLI ARTICOLI DELLA SEZIONE-->
                                        {% assign normal_posts = site.categories[section.key] | where: 'draft' ,'false' %}
                                        {% if normal_posts.size > 0 %}
@@ -136,7 +137,7 @@ keywords: "responsive,jekyll,minimal template"
                                           {% for doc_post in normal_posts_ord %}
                                              {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
                                              {% if post_draft == "false" %}
-                                             <li><a href="{{ doc_post.url  | relative_url }}">{{ doc_post.title }} </a></li>
+                                             <li><a href="{{ doc_post.url  | relative_url }}"><h7 class="heading-7" itemprop="headline"></h7>{{ doc_post.title }} </a></li>
                                              {% endif %}
                                           {% endfor %}
                                        {% endif %}
@@ -153,7 +154,7 @@ keywords: "responsive,jekyll,minimal template"
                         <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
                         <h7 class="heading-7" itemprop="headline">
                         <!-- MESSAGGIO NESSUNA SEZIONE-->
-                        {{site.data.ui-text[site.locale].category_no | default: "Crea un articolo in una categoria o sezione .." }}{{section.label}}
+                        {{site.data.ui-text[site.locale].category_no | default: "Create an article in a category or section .." }}{{section.label}}
                         </h7>
                   {% endif %}
                </div>

@@ -6,7 +6,7 @@
          <div class="section-title">
             {% assign title = site.data.topicsarea.title %}
             {% assign subtitle = site.data.topicsarea.subtitle %}
-            <h4 class="heading-4">{{title}}</h4>
+            <h5 class="heading-5">{{title}}</h5>
             <h7 class="heading-7"> <p>{{subtitle}}</p></h7>
          <div class="col">
             <!-- Start Topics  Area -->
@@ -50,7 +50,7 @@
                <article class="post topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
                      <header class="topics-title">
                         {% assign all_posts = site.categories[category_name] | where: 'draft' ,'false' %}
-                     <h4 class="heading-4 text-capitalize">{{ category_label }} ({{posts_number}})</h4> 
+                     <h5 class="heading-5 text-capitalize">{{ category_label }} ({{posts_number}})</h5> 
                      </header>
                      <ul class="topics-list list-inline">
                         <!-- AGGIUNGERE IL CAMPO ORDER AL POST - CONTROLLA CHE CI SIA ALMENTO UN POST NELLA CATEGORIA-->
@@ -61,7 +61,7 @@
                            {% for doc_post in evidence_posts_cat %}
                            {% capture post_draft %}{{ doc_post.draft}}{% endcapture %}
                               {% if post_draft == "false" %}
-                              <li><a href="{{ doc_post.url | relative_url }}">{{ doc_post.title }} </a></li>
+                              <li><a href="{{ doc_post.url | relative_url }}"><h7 class="heading-7">{{ doc_post.title }}</h7></a></li>
                               {% endif %}
                            {% endfor %}
                         <!--STAMPO POST DELLE SEZIONI-->
@@ -74,7 +74,7 @@
                               {% capture section_draft %}{{ section.draft}}{% endcapture %}
                               {% if section_draft == "false" %}
                                  {% if post_draft == "false" %}
-                                 <li><a href="{{ doc_post.url | relative_url }}">{{ doc_post.title }} </a></li>
+                                 <li><a href="{{ doc_post.url | relative_url }}"><h7 class="heading-7">{{ doc_post.title }}</h7></a></li>
                                  {% endif %}
                               {% endif %}
                            {% endfor %}

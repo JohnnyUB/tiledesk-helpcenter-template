@@ -13,13 +13,16 @@
         <div class="container">
             <div class="navigation-box">
                 <div class="navigation-left">
-                    {% capture logo %}{{site.data.header.logo_url}}{% endcapture %}
+                {% capture logo %}{{site.data.header.logo_url}}{% endcapture %}
+                {% if logo != '' %}<!--CONTROLLO CHE CI SIA IL LOGO-->
                     <a class="header-logo" href="{{ "/" | relative_url }}"><img src="{{ logo | relative_url }}" alt="header logo" width="auto" height="85" ></a>
+                {% endif %}
                 </div>
       <div class="navigation-right">
         <nav class="navigation-navbar">
             <ul id="navigation-menu" class="slimmenu">
-				{% for link in site.data.navigation.items %}
+            {% assign menu_active = site.data.navigation.items | where: 'draft', false  %}
+				{% for link in menu_active %}
 					{% assign active = nil %}
 					{% for sublink in link.submenu %}
 						{% if page.url contains sublink.url %}

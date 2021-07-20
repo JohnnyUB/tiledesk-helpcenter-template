@@ -1,7 +1,7 @@
 # config.yml
 # finale
 backend:
-  name: test-repo #git-gateway #-- PRODUZIONE test-repo   
+  name: git-gateway #-- PRODUZIONE test-repo   
   proxy_url: http://localhost:8081/api/v1
   repo: Tiledesk/tiledesk-helpcenter-template #-- PRODUZIONE
   branch: main
@@ -9,7 +9,7 @@ backend:
 # one is running (netlify-cms-proxy-server).
 # one is running (yarn start-netlify, which uses netlify-cms-proxy-server).
 # when using the default proxy server port
-local_backend: true #--PRODUZIONE false
+local_backend: false #--PRODUZIONE false
 #url: http://localhost:8082/api/v1
 #allowed_hosts: ['127.0.0.1']
   #branch: master # Branch to update (optional; defaults to master)
@@ -65,7 +65,7 @@ collections:
       - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Order", name: "order", widget: "number", default: 0, value_type: "int" }
       - { label: "Commento", name: "comment", widget: "boolean", default: false }
-      - { label: "Abstract", name: "excerpt", widget: "string", default: "..." }
+      - { label: "Abstract", name: "excerpt", widget: "string", default: "", required: false }
       - { label: "Immagine post", name: "post_image", widget: "image", default: "/images/uploads/service-icon3.png"  }
       - { label: "Autore", name: "autore", widget: "relation", collection: "config", file: "autori",  search_fields: ['autori.*.name'], value_field: 'autori.*.label', display_fields: ['autori.*.label'], multiple: false, required: false }
       - { label: "Categorie", name: "categories", widget: "relation", collection: "config", file: "category",  search_fields: ['category.*.label'], value_field: 'category.*.key', display_fields: ['category.*.label','category.*.type'], multiple: true, required: false }
@@ -170,19 +170,21 @@ collections:
             fields:
               - { label: Text, name: text, widget: string }
               - { label: Url, name: url, widget: string }
+              - { label: Draft, name: draft, widget: boolean, default: false }
               - label: submenu
                 name: submenu
                 widget: list
                 fields:
                   - { label: Text, name: text, widget: string }
                   - { label: Url, name: url, widget: string }
+                  - { label: Draft, name: draft, widget: boolean, default: false }
       - label: "Custom Categories Widget"
         name: "topics_area"
         file: "_data/topicsarea.yml"
         fields:
-          - { label: Titolo, name: title, widget: string }
-          - { label: Sottotitolo, name: subtitle, widget: string }
-          - { label: 'N. post per categoria', name: limit, widget: number }
+          - { label: Titolo, name: title, widget: string, required: false }
+          - { label: Sottotitolo, name: subtitle, widget: string, required: false }
+          - { label: 'N. post per categoria', name: limit, widget: number,default: 5, required: false }
           - { label: 'Tipo di visualizzazione', name: display_mode, widget: select , options: ['article_in_section', 'article_in_category', 'all'] }
           - label: "Home Widget"
             name: "widget"
@@ -202,6 +204,7 @@ collections:
             name: favicon_url
             widget: image
             default: /assets/images/favicon.png
+            required: false
             media_library:
               config:
                 multiple: false
@@ -210,6 +213,7 @@ collections:
             name: logo_url
             widget: image
             default: /assets/images/logo-deep-linking-tiledesk.png
+            required: false
             media_library:
               config:
                 multiple: false
@@ -219,6 +223,7 @@ collections:
             widget: color
             enableAlpha: true
             allowInput: true
+            required: false
           - robots: Robots
             name: robots
             widget: select
@@ -243,6 +248,7 @@ collections:
           - { label: Dribble, name: dribble, widget: string, required: false }
           - { label: Youtube, name: youtube, widget: string, required: false }
           - { label: Sito web, name: website, widget: string, required: false }
+          - { label: Mail, name: mail, widget: string, required: false }
       - label: "Custom Blog Name"
         name: "blog"
         file: "_data/blog.yml"

@@ -79,6 +79,10 @@
                             {% if website != "" %}
                                 <li class="list-inline-item"><a href="{{website}}" target="_blank"><i class="fa fa-internet-explorer"></i></a></li>
                             {% endif %}
+                            {% capture mail %}{{site.data.footer.mail}}{% endcapture %}
+                            {% if mail != "" %}
+                                <li class="list-inline-item"><a href="mailto:{{mail}}" target="_blank"><i class="fa fa-envelope"></i></a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>

@@ -18,10 +18,14 @@ DEB5: {{include.type}}
 -->
 <div class="{{ include.type | default: 'list' }}__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-        <h5 class="heading-5" itemprop="headline">
+        <h7 class="heading-7" itemprop="headline" style="margin-bottom: -2px;">
+          <p class="archive__item-excerpt" itemprop="description">
           <a href="{{ post.url | relative_url }}" rel="permalink">{{ title }}</a>
-        </h5>
-        <!--ABSTRACT ARTICOLO-->
-        {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
+          </p>
+        </h7>
+        <!--ABSTRACT ARTICOLO
+        <h7 style="font-size: 13px; font-style: italic;">
+          {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 93 }}</p>{% endif %}
+        </h7>-->
   </article>
 </div>

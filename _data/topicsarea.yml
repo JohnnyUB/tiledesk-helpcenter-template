@@ -1,6 +1,6 @@
-title: Leggi l'articolo
-subtitle: Seleziona la Categoria
-limit: 8
+title: Featured articles
+subtitle: ""
+limit: 5
 display_mode: all
 widget:
   - name: all_categories
