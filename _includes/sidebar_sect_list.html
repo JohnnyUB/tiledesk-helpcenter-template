@@ -17,8 +17,17 @@
      <div class="recent-wrapper">
         <div class="recent-details">
           <li><i class="changelog-fix"></i>
-            {% assign my_section_url = "/categories/" | append: section.url %}
-            <a href="{{ my_section_url  | relative_url }}">{{ section.label }}</a>
+            <!--CONTROLLO CHE NELLA SEZIONE CI SIA ALMENO UN POST-->
+            {% capture section_key %}{{section.key}}{% endcapture %}
+            {% capture section_cat_key %}{{section.category_key}}{% endcapture %}
+            {% assign all_posts_of_section = site.categories[section_key] | where: 'category_key', section_cat_key | where: 'draft' ,'false' %}
+           <!--DEB1 {{all_posts_of_section.size}} DEB2 {{section_key}} DEB3 {{section_cat_key}}-->
+            {% if all_posts_of_section.size > 0 %}
+              {% assign my_section_url = "/categories/" | append: section.url %}
+              <a href="{{ my_section_url  | relative_url }}">{{ section.label }}</a>
+            {% else %}
+              {{ section.label }}
+            {% endif %}
           </li>
         </div>
      {% endif %}
