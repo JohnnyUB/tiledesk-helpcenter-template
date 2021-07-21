@@ -10,7 +10,7 @@ author_profile: false
       <div class="page-title-wrapper section-spacing">
          <div class="page-title text-center white-text">
             <h2 class="heading-2">{{page.title | replace: '_', '-' }}</h2>
-            PAGE-TITLE{{page.title}}
+            PAGE_DEBUG{{page}}
          </div>
       </div>
    </section>
@@ -22,9 +22,14 @@ author_profile: false
          <div class="container">
             <div class="row">
                <div class="col-md-7 col-lg-8">
-               PAGE-POST{{page.posts}}
                 {% for post in page.posts %}
-                    {% include archive-single.html %}
+                <div class="{{ include.type | default: 'list' }}__item">
+                  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+                        <h7 class="heading-7" itemprop="headline" style="margin-bottom: -2px;">
+                          <a href="{{ post.url | relative_url }}" rel="permalink">{{ post.title }}</a>
+                        </h7>
+                  </article>
+                </div>
                 {% endfor %}
                </div>
                <div class="col-md-5 col-lg-4">

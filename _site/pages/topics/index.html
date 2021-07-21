@@ -33,17 +33,20 @@
     <!-- Site Title -->
     <title> Topics </title>
     <!--  Add Favicon -->
-	<!-- <link rel="shortcut icon" href="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/assets/images/favicon.png" type="image/x-icon"/>
-    	 <link rel="icon" href="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/assets/images/favicon.png" type="image/x-icon"/> -->
+	<!-- <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon"/>
+    	 <link rel="icon" href="/assets/images/favicon.png" type="image/x-icon"/> -->
 	
 	
 	
-   		 <link rel="shortcut icon" href="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/assets/images/favicon.png" type="image/x-icon"/>
-    	 <link rel="icon" href="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/assets/images/favicon.png" type="image/x-icon"/>
+   		 <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon"/>
+    	 <link rel="icon" href="/assets/images/favicon.png" type="image/x-icon"/>
 	
 	<!-- Add CSS File -->
-    <link rel="stylesheet" href="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/assets/css/app.min.css "/>
+    <link rel="stylesheet" href="/assets/css/app.min.css "/>
+	<!-- Add BUILDING CSS  -->
+	<link rel="stylesheet" href="/assets/css/building.css "/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+	
 	
 </head>
 
@@ -59,6 +62,9 @@
 </div>
 <!-- Start Header Area -->
 <header class="header-area">
+    <div class="building-in-progress-header" style="display: none;" >
+        Building in progress .. Wait for completion ...
+    </div>
     <div class="header-navigation">
         <div class="container">
             <div class="navigation-box">
@@ -75,13 +81,13 @@
 					
 					
 					<li class="active">
-						<a href="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/">Home</a>
+						<a href="/">Home</a>
 						
 					</li>
 				
                <!-- 
 			 	 <li>
-                    <a class="nav-search" data-toggle="modal" data-target="#modal"><img src="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/assets/images/search-logo.png" alt="nav search"></a>
+                    <a class="nav-search" data-toggle="modal" data-target="#modal"><img src="/assets/images/search-logo.png" alt="nav search"></a>
                 </li>
 			 </ul>
             -->
@@ -142,7 +148,7 @@
     
       
         <li class="breadcrumb-item">
-          <a href="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/" itemprop="item"><span itemprop="name">Home</span></a>
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
           <meta itemprop="position" content="1" />
         </li>
        <!--<span>/</span> --> 
@@ -150,7 +156,7 @@
       
         
         <li class="breadcrumb-item">
-          <a href="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/pages" itemprop="item"><span itemprop="name">Pages</span></a>
+          <a href="/pages" itemprop="item"><span itemprop="name">Pages</span></a>
           <meta itemprop="position" content="2" />
         </li>
         <!-- <span class="breadcrumb-item">/</span> -->
@@ -210,9 +216,9 @@
                     <div class="footer-widget wow fadeIn" data-wow-duration="2s">
                         <h5 class="footer-title heading-5">Archives</h5>
                         <ul class="footer-category list-inline">
-                            <li><a href="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/categories">Categories</a></li>
-                            <li><a href="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/tags">Tags</a></li>
-                            <li><a href="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/year-archive">Archives</a></li>
+                            <li><a href="/categories">Categories</a></li>
+                            <li><a href="/tags">Tags</a></li>
+                            <li><a href="/year-archive">Archives</a></li>
                         </ul>
                     </div>
                 </div>
@@ -302,7 +308,7 @@
 	}
   </script>
     <!-- Add Javascript File -->
-   <script src="/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2/assets/js/build.min.js"></script>
+   <script src="/assets/js/build.min.js"></script>
    		<script>
 			$(function() {
 				$('a[href*=\\#]').not(".no-smooth").on('click', function(event){
