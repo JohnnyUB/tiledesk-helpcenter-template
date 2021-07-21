@@ -1,7 +1,7 @@
 # config.yml
 # finale
 backend:
-  name: git-gateway #-- PRODUZIONE test-repo   
+  name: test-repo  #git-gateway #-- PRODUZIONE test-repo   
   proxy_url: http://localhost:8081/api/v1
   repo: Tiledesk/tiledesk-helpcenter-template #-- PRODUZIONE
   branch: main
@@ -9,7 +9,7 @@ backend:
 # one is running (netlify-cms-proxy-server).
 # one is running (yarn start-netlify, which uses netlify-cms-proxy-server).
 # when using the default proxy server port
-local_backend: false #--PRODUZIONE false
+local_backend: true #--PRODUZIONE false
 #url: http://localhost:8082/api/v1
 #allowed_hosts: ['127.0.0.1']
   #branch: master # Branch to update (optional; defaults to master)

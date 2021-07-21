@@ -70,10 +70,6 @@ author_profile: false
                      {% endif %}
                   {% endif %}
                   {% if display_mode == "all" or display_mode == "article_in_section" %}
-                  <!--SE C'E ALMENO UNA SEZIONE-->
-                  {% if all_categories.size > 0%}
-                     <hr>
-                  {% endif %}
                      <!--CICLO SU TUTTE LE SEZIONI DELLA CATEGORIA-->
                      {% for section in all_categories %}
                         <!--PRENDO TUTTE LE SEZIONI-->
@@ -81,6 +77,10 @@ author_profile: false
                         {% assign all_posts = site.categories[section_key] | where: 'draft' ,'false' %}
                         <!--SE UNA SEZIONE CONTIENE ALMENO UN ARTICOLO-->
                         {% if section !=  category_name and all_posts.size > 0 %}
+                        <!--SE C'E ALMENO UNA SEZIONE-->
+                        {% if all_posts_of_category.size > 0%}
+                           <hr>
+                        {% endif %}
                            <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
                               <h6 class="heading-6" itemprop="headline">
                               <!-- COSTRUISCO URL SEZIONE -->

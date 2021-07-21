@@ -23,7 +23,7 @@ title: "Tiledesk - Documentation Website"
 email: "info@tiledesk.com"
 description: "Tiledesk is AI powered live chat platform"
 keywords: "jekyll, minimal jekyll, jekyll theme, responsive jekyll, seo friendly blog, super fast blog, responsive"
-baseurl: "" #"/60f531edf7de0400191ef9ca-60f551c06a36920022e0804f" # the subpath of your site, e.g. /blog
+baseurl: "/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2" # the subpath of your site, e.g. /blog
 url: "" #"https://bpphelpcenter.netlify.app/"
 cover_image: "https://themeix.com/wp-content/uploads/dooxy-responsive-html-template-preview.png" # Image will Display in Social Media When share the website
 facebook: "https://www.facebook.com"
