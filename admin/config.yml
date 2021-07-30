@@ -272,6 +272,7 @@ collections:
             widget: "list"
             fields:
               - { label: Key, name: key, widget: string }
+              - { label: "Order", name: "order", widget: "number", default: 0, value_type: "int" }
               - { label: Slug, name: slug, widget: hidden }
               - { label: Nome, name: label, widget: string }
               - { label: Url, name: url, widget: string }

@@ -11,7 +11,8 @@
          <div class="col">
             <!-- Start Topics  Area -->
             <div class="topics-service-area">
-               {% for category in site.data.category.category %}
+               {% assign my_categories = site.data.category.category | sort: "order" %}
+               {% for category in my_categories  %}
                 {% capture category_name %}{{ category.key}}{% endcapture %}
                 {% capture category_label %}{{ category.label}}{% endcapture %}
                 {% capture category_draft %}{{ category.draft}}{% endcapture %}

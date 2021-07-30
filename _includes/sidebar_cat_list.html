@@ -4,7 +4,7 @@
   <div class="changelog-service wow fadeIn" data-wow-duration="3s">
   <ul class="changelog-list list-inline">
     <!--PRENDO SOLO LE CATEGORIE-->
-   {% assign my_categories =  site.data.category.category | where: 'type' ,'(categoria)' %}
+   {% assign my_categories =  site.data.category.category | where: 'type' ,'(categoria)' | sort: "order"  %}
    {% for category in my_categories %}
    <!-- for category in site.data.category.category %} -->
    <!-- DEB: {{category}} -->

@@ -3,7 +3,7 @@
     <div class="headline-wrapper ">
         <div class="container">
             <div class="row">
-                {% assign my_categories =  site.data.category.category | where: 'type' ,'(categoria)' | where: 'draft' ,'false' %}
+                {% assign my_categories =  site.data.category.category | where: 'type' ,'(categoria)' | where: 'draft' ,'false' | sort: "order" %}
                 <!--DEBUG: {{my_categories}}-->
                 {% for category in my_categories %}
                 {% capture category_key %}{{category.key}}{% endcapture %}
