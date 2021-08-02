@@ -3,6 +3,8 @@
 <html lang="en">
 <head>
     <!-- meta -->
+	<!--SEO-->
+	{% seo %}
 	<!-- NO INDEX DEL SITO DA FILE HEADER YML-->
 	{% if site.data.header.robots %}
   	<meta name="robots" content="{{site.data.header.robots}}" />

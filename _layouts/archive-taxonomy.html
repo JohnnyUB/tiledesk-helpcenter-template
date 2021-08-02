@@ -41,7 +41,7 @@ author_profile: false
                      <h5 class="heading-6">{{site.data.ui-text[site.locale].section_category_onlysez | default: "The sections of the category" }} {{page_tit.label | replace: '_', '-' }}</h5>
                   {% endif %}
                   <!--PRENDO TUTTE LE CATEGORIE-->
-                  {% assign all_categories =  site.data.category.category | where: 'category_key' , category_name | where: 'draft' ,'false'% | sort: "order" %}
+                  {% assign all_categories =  site.data.category.category | where: 'category_key' , category_name | where: 'draft' ,'false' | sort: "order" %}
                   <article class="post topics-service bg-color3 wow fadeIn" data-wow-duration="3s">
                   {% if display_mode == "article_in_category" %}
                      <!--CICLO SU TUTTI GLI ARTICOLI DELLA CATEGORIA-->
