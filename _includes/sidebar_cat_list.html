@@ -12,7 +12,7 @@
      {% if category_draft == "false" %}
      <div class="recent-wrapper">
         <div class="recent-details">
-          <li><i class="changelog-fix"></i>
+          <li><i class="changelog-bug"></i>
             {% assign my_category_url = "/categories/" | append: category.url %}
             <a href="{{ my_category_url  | relative_url }}">{{ category.label }}</a>
           </li>

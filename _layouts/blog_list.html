@@ -23,9 +23,9 @@ layout: default
                            </div>
                         </div>
                         <ul class="blog-meta list-inline">
-                           {% if post.autore %}
+                           {% if post.author %}
                            <li class="list-inline-item"><img src="{{ '/assets/images/blog-author.png' | relative_url }}" alt="{{post.title}}">
-                           	<a href="{{post.autore_url}}">{{post.autore}}</a></li>
+                           	<a href="{{post.autore_url}}">{{post.author}}</a></li>
                            {% endif %}
                            {% if post.date %}
                            <li class="list-inline-item"><img src="{{ '/assets/images/blog-date.png' | relative_url }}" alt="{{post.title}}">{{post.date | date_to_long_string}}</li>

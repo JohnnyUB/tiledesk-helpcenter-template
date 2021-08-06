@@ -8,7 +8,7 @@
 ####################################################
 
 # aggiunta per prova 31/01/21
-#permalink: /:categories/:title/
+#permalink: /:slug/
 breadcrumbs: true  # disabled by default
 
 sass:
@@ -18,14 +18,34 @@ sass:
     exclude:
       - bower_components
 #finale
-# Site settings
-title: "Tiledesk - Documentation Website"
+# Site settings 
+# SEO START
+title: "Tiledesk"
+tagline: "Tiledesk is a Free and Open Source Live Chat with ChatBot." 
 email: "info@tiledesk.com"
-description: "Tiledesk is AI powered live chat platform"
-keywords: "jekyll, minimal jekyll, jekyll theme, responsive jekyll, seo friendly blog, super fast blog, responsive"
+description: "Tiledesk is a Free and Open Source Live Chat with ChatBot. Build your own customer support with a multi-channel platform for Web, Android and iOS"
+keywords: "tiledesk, chatbot, chat, AI, bot, open source"
 baseurl: "" #"/60f70050f7de040019316f1a-60f70069f0d31f0022f681e2" # the subpath of your site, e.g. /blog
 url: "" #"https://bpphelpcenter.netlify.app/"
-cover_image: "https://themeix.com/wp-content/uploads/dooxy-responsive-html-template-preview.png" # Image will Display in Social Media When share the website
+twitter:
+  username: tildesk_prova
+  card: summary_large_image
+logo: "/images/uploads/logo-deep-linking-tiledesk.png" 
+cover_image: "/images/uploads/logo-deep-linking-tiledesk.png" # Image will Display in Social Media When share the website
+social: # DA STUDIARE
+  name: Tiledesk
+  links:
+    - https://twitter.com/tiledesk
+    - https://www.facebook.com/tiledesk
+    - https://www.linkedin.com/it/tiledesk
+    - https://github.com/tiledesk
+
+google_site_verification: # DA STUDIARE
+locale: #- The locale these tags are marked up in. Of the format 
+language_TERRITORY:  #Default is en_US. Takes priority over existing config key 
+lang:
+
+# SEO END
 facebook: "https://www.facebook.com"
 twitter: "https://www.twitter.com"
 instagram: "https://www.instagram.com"
@@ -37,10 +57,17 @@ vimeo: "https://www.vimeo.com"
 dribble: "https://www.dribble.com"
 youtube: "https://www.youtube.com"
 
-## Theme Options
+## TIMEZONE
+timezone: Europe/Rome
+
+## SEO CONFIGURAZIONE
+## Theme Options SEO
 animated_header: "false"  #true 
-twitter_username: jekyllrb
-github_username:  jekyll
+twitter_username: tiledesk #ATTENTO DA MODIFICARE IN PRODUZIONE
+github_username:  jekyll #ATTENTO DA MODIFICARE IN PRODUZIONE
+img_width: 32
+img_height: 32
+img_url: /assets/images/favicon.png
 
 toc:
   min_level: 1
@@ -88,8 +115,8 @@ collections:
 ############################################################
 # Site configuration for the Jekyll Pagination Gem
 # The values here represent the defaults if nothing is set
-  #paginate: 2
-  #paginate_path: "/blog/page:num/"
+#paginate: 2
+#paginate_path: "/blog/page:num/"
 pagination:
   
   # Site-wide kill switch, disabled here it doesn't run at all 
@@ -129,7 +156,7 @@ pagination:
 
   # Optional, the default locale to use, omit to disable (depends on a field 'locale' to be specified in the posts, 
   # in reality this can be any value, suggested are the Microsoft locale-codes (e.g. en_US, en_GB) or simply the ISO-639 language code )
-  locale: 'it-IT' 
+  locale: 'en_US'
 
  # Optional,omit or set both before and after to zero to disable. 
  # Controls how the pagination trail for the paginated pages look like. 
@@ -210,13 +237,7 @@ autopages:
 tag_page_layout: tag_page
 tag_page_dir: tag
 permalink: /:title/ 
-
- 
-   
-    
 feed:
   collections:
     posts:
       path: "/index.xml"
-
-        
