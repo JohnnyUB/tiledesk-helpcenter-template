@@ -26,7 +26,7 @@
 	<!-- Twitter cards -->
 	<meta name="twitter:creator" content="@{{ page.twitter_username }}">
 	{% if page.title %}<meta name="twitter:title"   content="{{ page.title }}">{% else %}<meta name="twitter:title"   content="{{ site.title }}">{% endif %}	
-	{% if page.excerpt %}<meta name="twitter:description" content="{{ page.excerpt }}">{% else %}<meta name="twitter:description" content="{{ site.description }}">{% endif %}
+	{% if page.excerpt != "" %}<meta name="twitter:description" content="{{ page.excerpt }}">{% else %}<meta name="twitter:description" content="{{ site.description }}">{% endif %}
 	{% if page.post_image %}<meta name="twitter:card"  content="summary_large_image"><meta name="twitter:image" content="{{ site.url }}{{ page.post_image }}">{% else %}<meta name="twitter:card"  content="summary"><meta name="twitter:image" content="{{ site.cover_image }}">{% endif %}
 	<!-- Site Title -->
     <title>{% if page.title %} {{page.title}} {% else %} {{site.title}} {% endif %}</title>
