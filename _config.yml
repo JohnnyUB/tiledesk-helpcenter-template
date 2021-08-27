@@ -82,7 +82,7 @@ toc:
 # Build settings
 markdown: kramdown
 theme: minima
-url: "http://127.0.0.1/" # the base hostname & protocol for your site
+url: "http://34.89.187.176" # the base hostname & protocol for your site
 plugins:
   - jekyll-feed
   - jekyll-paginate-v2
