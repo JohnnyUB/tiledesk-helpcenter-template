@@ -232,7 +232,7 @@ autopages:
     title: ':tag' # :tag is replaced by the tag name
     permalink: '/tag/:tag'  
       
-
+ 
 # Tag Options
 tag_page_layout: tag_page
 tag_page_dir: tag
